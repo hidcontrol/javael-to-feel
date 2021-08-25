@@ -1,4 +1,0 @@
-"""
-PyEDA Parsing Utilities
-"""
-
