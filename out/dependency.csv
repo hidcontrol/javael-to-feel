@@ -1,0 +1,528 @@
+srcFormName,srcFieldName,dstFieldNames,DMN_name,expression
+Заявка на технологическое присоединение,notificationTextDocMiss,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,TypeApplicationRef,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,TypeApplicationRef,{'true'},,true
+Заявка на технологическое присоединение,SignMiddleName,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,sign_wiringDiagram_appl,"{'empty', 'wiringDiagram', 'contains', 'view', 'ApplicantType'}",,"view.viewId.contains('portal.xhtml') and ['UL','IP'].contains(fields.ApplicantType.Code) and !empty fields.wiringDiagram"
+Заявка на технологическое присоединение,ScanRBPAct,{'false'},,false
+Заявка на технологическое присоединение,loginName,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,loginName,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')) or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,NetworkContractDate,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896' and fields['p_TimeTPType'].Code eq '32898'
+Заявка на технологическое присоединение,NetworkContractDate,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896' and fields['p_TimeTPType'].Code eq '32898'
+Заявка на технологическое присоединение,NetworkContractDate,{'formUtilFunctions'},,formUtilFunctions.currentDate()
+Заявка на технологическое присоединение,ScanNotificationLetterSO,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,contractGPNumber,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,contractGPNumber,"{'dataObjectController', 'empty', 'view', 'contractGPNumber'}",,view.viewId.contains('portal.xhtml') and !empty fields.contractGPNumber  or  (dataObjectController.instance.objectStatus.status.code eq 'ta10_ContractExecuted'  or dataObjectController.instance.objectStatus.status.code eq 'ta04_Canceled'  or dataObjectController.instance.objectStatus.status.code eq 'ta11_ContractTerminated' )
+Заявка на технологическое присоединение,DeviceAddrStreet,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound eq true
+Заявка на технологическое присоединение,DeviceAddrStreet,{'false'},,false
+Заявка на технологическое присоединение,ChangeDate,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,PaymentsNumber,"{'Code', 'fields'}",,fields['p_PaymentType'].Code eq '32931'
+Заявка на технологическое присоединение,PaymentsNumber,"{'Code', 'fields'}",,fields['p_PaymentType'].Code eq '32931'
+Заявка на технологическое присоединение,BranchId,{'false'},,false
+Заявка на технологическое присоединение,typeOpf,{'ApplicantType'},,fields.ApplicantType.Code eq 'UL'
+Заявка на технологическое присоединение,p_TypeTP,{'true'},,true
+Заявка на технологическое присоединение,AreaaddrReg,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,AreaaddrReg,{'true'},,true
+Заявка на технологическое присоединение,AreaaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,DeviceAddrLocality,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound eq true
+Заявка на технологическое присоединение,DeviceAddrLocality,"{'empty', 'DeviceAddrCity', 'DeviceAddrRayon'}",,!empty fields.DeviceAddrRayon and empty fields.DeviceAddrCity
+Заявка на технологическое присоединение,sign_ScanNotificationLetterSO_SO,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,sign_ScanNotificationLetterSO_SO,"{'empty', 'p_ContractTransferType', 'ScanNotificationLetterSO'}",,fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanNotificationLetterSO
+Заявка на технологическое присоединение,p_NoticeType,{'true'},,true
+Заявка на технологическое присоединение,sharedOwnershipPersData,"{'securityDataProvider', 'view', 'sharedOwnership', 'true'}",,fields.sharedOwnership eq true and (view.viewId.contains('portal.xhtml') or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')))
+Заявка на технологическое присоединение,sharedOwnershipPersData,"{'view', 'sharedOwnership', 'true'}",,fields.sharedOwnership eq true and view.viewId.contains('portal.xhtml')
+Заявка на технологическое присоединение,Streetaddr,{'true'},,true
+Заявка на технологическое присоединение,Streetaddr,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,Streetaddr,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,p_ReasonTP,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,p_ReasonTP,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,ScanDogovor,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,ScanDogovor,"{'isSimpleTPScheme', 'securityDataProvider', '_Status', 'true'}",,securityDataProvider.hasRole('tehprisEE_ZayavkaTP') and fields.isSimpleTPScheme eq true and fields._Status eq 'ta02_Accepted'
+Заявка на технологическое присоединение,RequestChangeDate,{'false'},,false
+Заявка на технологическое присоединение,BankNameGP,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.Code eq 'FL'
+Заявка на технологическое присоединение,BankNameGP,"{'empty', 'BankNameGP', 'securityDataProvider', 'view'}",,!empty fields.BankNameGP and securityDataProvider.hasRole('tehprisEE_GpWorkP') or view.viewId.contains('portal.xhtml') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP')
+Заявка на технологическое присоединение,contractGP,"{'empty', 'ElectroCompany3', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser and !empty fields.ElectroCompany3
+Заявка на технологическое присоединение,contractGP,"{'dataObjectController', 'empty', 'contractGP', 'view'}",,view.viewId.contains('portal.xhtml') and empty fields.contractGP and (dataObjectController.instance.objectStatus.status.code ne 'ta10_ContractExecuted' or dataObjectController.instance.objectStatus.status.code ne 'ta04_Canceled' or dataObjectController.instance.objectStatus.status.code ne 'ta11_ContractTerminated')
+Заявка на технологическое присоединение,ElectroCompany3,"{'ORGNotFound', 'true'}",,fields.ORGNotFound ne true
+Заявка на технологическое присоединение,ElectroCompany3,{'true'},,true
+Заявка на технологическое присоединение,contactphone,"{'empty', 'securityDataProvider'}",,empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,cBuildingaddrFact,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,cBuildingaddrFact,"{'empty', 'securityDataProvider', 'sessionContext'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')  or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty sessionContext.get('accession_user'))
+Заявка на технологическое присоединение,EPUPlanDoc,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,EPUPlanDoc,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,p_SignDocType,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,p_SignDocType,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,p_RejoinsVoltage,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32896'
+Заявка на технологическое присоединение,p_RejoinsVoltage,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32896'
+Заявка на технологическое присоединение,isSimpleTPScheme,{'view'},,!view.viewId.contains('portal.xhtml')
+Заявка на технологическое присоединение,isSimpleTPScheme,{'true'},,true
+Заявка на технологическое присоединение,p_TimeTPType,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896'
+Заявка на технологическое присоединение,p_TimeTPType,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896'
+Заявка на технологическое присоединение,ContractDateCancelOffer,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,PaperGPDocsSend,"{'true', 'securityDataProvider', 'PaperGPDocsNeed'}",,(securityDataProvider.hasRole('tehprisEE_GpWork')) and fields.PaperGPDocsNeed eq true
+Заявка на технологическое присоединение,p_Location,{'true'},,true
+Заявка на технологическое присоединение,RegionaddrRef,"{'empty', 'securityDataProvider', 'id'}",,securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,RegionaddrRef,{'true'},,true
+Заявка на технологическое присоединение,RegionaddrRef,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,RegionaddrReg,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,RegionaddrReg,{'securityDataProvider'},,!(securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))
+Заявка на технологическое присоединение,RegionaddrReg,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,RegionaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,AddrUndefined,"{'Code', 'false', 'fields'}",,false and fields['p_DeviceAddrMatchWith'].Code eq '32886'
+Заявка на технологическое присоединение,DULser,{'ApplicantType'},,fields.ApplicantType.Code eq 'FL' or fields.ApplicantType.Code eq 'IP'
+Заявка на технологическое присоединение,DULser,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,RegionaddrFact,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,RegionaddrFact,{'securityDataProvider'},,!(securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))
+Заявка на технологическое присоединение,RegionaddrFact,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,RegionaddrFact,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,buttonSend,{'dashboardContext'},,dashboardContext.context.vis_buttonSend
+Заявка на технологическое присоединение,buttonSend,{'securityDataProvider'},,securityDataProvider.hasRole('admin')
+Заявка на технологическое присоединение,ScanActTolerance,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,ScanActBooking_appl,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,ScanActBooking_appl,"{'ScanActBooking', 'empty', 'securityDataProvider'}",,securityDataProvider.hasRole('tehprisEE_User') and !empty fields.ScanActBooking
+Заявка на технологическое присоединение,Boroughaddr,{'true'},,true
+Заявка на технологическое присоединение,Boroughaddr,"{'Cityaddr', 'empty', 'Boroughaddr'}",,empty fields.Boroughaddr and empty fields.Cityaddr
+Заявка на технологическое присоединение,Boroughaddr,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,emailAddress,"{'empty', 'securityDataProvider'}",,empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,_Status,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,PaperSODocsSend,"{'empty', 'PaperSODocsNeed'}",,!empty fields.PaperSODocsNeed
+Заявка на технологическое присоединение,PaperSODocsSend,"{'empty', 'PaperSODocsNeed'}",,!empty fields.PaperSODocsNeed
+Заявка на технологическое присоединение,ApplicantType,"{'empty', 'securityDataProvider'}",,empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,DeviceAddrNotFound,"{'Code', 'fields'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886'
+Заявка на технологическое присоединение,PUSerialNumber,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,sign_ScanDopDogovor,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,sign_ScanDopDogovor,"{'empty', 'ScanDopDogovor', 'p_ContractTransferType'}",,fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanDopDogovor
+Заявка на технологическое присоединение,PaperGPDocsSendDate,"{'PaperGPDocsSend', 'true'}",,fields.PaperGPDocsSend eq true
+Заявка на технологическое присоединение,PaperGPDocsSendDate,"{'PaperGPDocsSend', 'true'}",,fields.PaperGPDocsSend eq true
+Заявка на технологическое присоединение,sign_ScanActTU,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,sign_ScanActTU,"{'empty', 'p_ContractTransferType', 'ScanActTU'}",,fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanActTU
+Заявка на технологическое присоединение,Filial,{'true'},,true
+Заявка на технологическое присоединение,Filial,{'true'},,true
+Заявка на технологическое присоединение,Filial,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')) or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,Date_TUCheck,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,sign_ScanActTP,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,sign_ScanActTP,"{'empty', 'p_ContractTransferType', 'ScanActTP'}",,fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanActTP
+Заявка на технологическое присоединение,SignFirstName,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,SignFirstName,"{'empty', 'securityDataProvider', 'fields', 'id', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true or ((securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')) or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,EmailDataAgree,{'true'},,true
+Заявка на технологическое присоединение,IdAppeal,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,IdAppeal,{'true'},,true
+Заявка на технологическое присоединение,sign_electricalCertificates_appl,"{'empty', 'contains', 'electricalCertificates', 'view', 'ApplicantType'}",,"view.viewId.contains('portal.xhtml') and ['UL','IP'].contains(fields.ApplicantType.Code) and !empty fields.electricalCertificates"
+Заявка на технологическое присоединение,RedresentDocDate,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,Cityaddr,{'true'},,true
+Заявка на технологическое присоединение,Cityaddr,"{'Cityaddr', 'empty', 'Boroughaddr'}",,empty fields.Boroughaddr and empty fields.Cityaddr
+Заявка на технологическое присоединение,Cityaddr,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,ApartmentaddrReg,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,ApartmentaddrReg,{'true'},,true
+Заявка на технологическое присоединение,ApartmentaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,ogrnUL,{'ApplicantType'},,fields.ApplicantType.Code eq 'UL'
+Заявка на технологическое присоединение,BIK,{'ApplicantType'},,fields.ApplicantType.Code eq 'UL'
+Заявка на технологическое присоединение,p_ContractTransferType,{'true'},,true
+Заявка на технологическое присоединение,p_ContractTransferType,"{'isSimpleTPScheme', 'empty', 'id', 'true'}",,fields.isSimpleTPScheme eq true or (!empty fields.id)
+Заявка на технологическое присоединение,buttonSaveDraft,"{'dataObjectController', 'empty', 'securityDataProvider'}",,!dataObjectController.managed and dataObjectController.instance.metaObject.attributes.get('drafts') and !empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,sign_acceptanceDoc_appl,"{'empty', 'acceptanceDoc', 'contains', 'view', 'ApplicantType'}",,"view.viewId.contains('portal.xhtml') and ['UL','IP'].contains(fields.ApplicantType.Code) and !empty fields.acceptanceDoc"
+Заявка на технологическое присоединение,Indexaddr,{'true'},,true
+Заявка на технологическое присоединение,Indexaddr,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,Indexaddr,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,p_ApplicationSendType,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,p_ApplicationSendType,{'true'},,true
+Заявка на технологическое присоединение,CorAccountGP,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.Code eq 'FL'
+Заявка на технологическое присоединение,CorAccountGP,"{'empty', 'securityDataProvider', 'view', 'CorAccountGP'}",,!empty fields.CorAccountGP and securityDataProvider.hasRole('tehprisEE_GpWorkP') or view.viewId.contains('portal.xhtml') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP')
+Заявка на технологическое присоединение,SignFL,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'FL' or fields.ApplicantType.value.fields.Code eq 'IP'
+Заявка на технологическое присоединение,CityaddrReg,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,CityaddrReg,{'true'},,true
+Заявка на технологическое присоединение,CityaddrReg,"{'empty', 'CityaddrReg', 'BoroughaddrReg'}",,empty fields.BoroughaddrReg and empty fields.CityaddrReg
+Заявка на технологическое присоединение,CityaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,electricalCertificates,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,sign_ScanNotificationLetter_SO,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,EmergencyControl,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,ScanActTP,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,StreetaddrReg,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,StreetaddrReg,{'true'},,true
+Заявка на технологическое присоединение,StreetaddrReg,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') and empty fields.id
+Заявка на технологическое присоединение,StreetaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,PowerLabel,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32897'
+Заявка на технологическое присоединение,p_ContractTypeTarif,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,DULtype,{'ApplicantType'},,fields.ApplicantType.Code eq 'FL' or fields.ApplicantType.Code eq 'IP'
+Заявка на технологическое присоединение,DULtype,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,DULtype,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,ScanActTU,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,ACCOSessionId,{'false'},,false
+Заявка на технологическое присоединение,p_IndividualInputSwitching,"{'Code', 'fields', 'true'}",,fields['p_TypeTP'].Code eq '32880' and fields['UninhabitedTP'] eq true
+Заявка на технологическое присоединение,p_IndividualInputSwitching,"{'Code', 'fields', 'true'}",,fields['p_TypeTP'].Code eq '32880' and fields['UninhabitedTP'] eq true
+Заявка на технологическое присоединение,BoroughaddrFact,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,BoroughaddrFact,{'true'},,true
+Заявка на технологическое присоединение,BoroughaddrFact,"{'BoroughaddrFact', 'empty', 'CityaddrFact'}",,empty fields.BoroughaddrFact and empty fields.CityaddrFact
+Заявка на технологическое присоединение,BoroughaddrFact,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,p_CapacitySort2,"{'empty', 'p_TypeOfLoad', 'fields', 'p_CapacitySort', 'Code', 'ApplicantType'}",,(fields['p_TypeTP'].Code eq '32880' and empty fields.p_CapacitySort) and ((fields.ApplicantType.value.fields.Code eq 'IP' or fields.ApplicantType.value.fields.Code eq 'UL') or (fields.ApplicantType.value.fields.Code eq 'FL' and fields.p_TypeOfLoad.value.fields.Code ne '56997'))
+Заявка на технологическое присоединение,p_CapacitySort2,"{'Code', 'fields', 'ApplicantType'}",, (fields.ApplicantType.value.fields.Code eq 'IP' or fields.ApplicantType.value.fields.Code eq 'UL') and fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,p_CapacitySort2,"{'empty', 'p_CapacitySort2', 'securityDataProvider', 'fields', 'p_CapacitySort', 'null', 'Code', 'ApplicantType'}",,(!empty fields.p_CapacitySort2 or !empty fields.p_CapacitySort or !securityDataProvider.hasRole('tehprisEE_User') or securityDataProvider.hasRole('admin')) ? fields.p_CapacitySort2 : (fields['p_TypeTP'].Code eq '32896' ? fields['p_CapacitySort2'] : ((fields.ApplicantType.value.fields.Code eq 'IP' or fields.ApplicantType.value.fields.Code eq 'UL') and fields['p_TypeTP'].Code eq '32880' ? fields['p_CapacitySort2'] : null))
+Заявка на технологическое присоединение,typeOpfGP,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.Code eq 'FL'
+Заявка на технологическое присоединение,typeOpfGP,"{'empty', 'securityDataProvider', 'typeOpfGP', 'view'}",,!empty fields.typeOpfGP and securityDataProvider.hasRole('tehprisEE_GpWorkP') or view.viewId.contains('portal.xhtml') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP')
+Заявка на технологическое присоединение,ElectroCompany,"{'ORGNotFound', 'true'}",,fields.ORGNotFound eq true
+Заявка на технологическое присоединение,ElectroCompany,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32896'
+Заявка на технологическое присоединение,p_ApplicantCategories,"{'empty', 'securityDataProvider'}",,empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,IndexaddrReg,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,IndexaddrReg,{'true'},,true
+Заявка на технологическое присоединение,IndexaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,AssoInvalidDataContainer,{'false'},,false
+Заявка на технологическое присоединение,earlierTPDocs,"{'securityDataProvider', 'contains', 'p_ReasonTP', 'view'}",,"['956','957'].contains(fields.p_ReasonTP.Code) and (view.viewId.contains('portal.xhtml') or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')))"
+Заявка на технологическое присоединение,Regionaddr,{'securityDataProvider'},,!(securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))
+Заявка на технологическое присоединение,Regionaddr,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,Regionaddr,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,SignPersData,"{'ApplicantType', 'contains', 'fields', 'true'}",,(fields['SignFL'] eq true or ['UL'].contains(fields.ApplicantType.Code))
+Заявка на технологическое присоединение,IdAppealACCO,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,FullPowerD,"{'Code', 'fields'}",, (fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32897')
+Заявка на технологическое присоединение,FullPowerD,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32897'
+Заявка на технологическое присоединение,AccountGP,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.Code eq 'FL'
+Заявка на технологическое присоединение,AccountGP,"{'empty', 'AccountGP', 'securityDataProvider', 'view'}",,!empty fields.AccountGP and securityDataProvider.hasRole('tehprisEE_GpWorkP') or view.viewId.contains('portal.xhtml') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP')
+Заявка на технологическое присоединение,DateCancelContract,{'AddAgreementReason'},,(fields.AddAgreementReason.Code eq '11')
+Заявка на технологическое присоединение,DateCancelContract,"{'dashboardContext', 'securityDataProvider', 'AddAgreementReason'}",,(fields.AddAgreementReason.Code eq '11') and( dashboardContext.context.vis_buttonSend or securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))
+Заявка на технологическое присоединение,p_FullVoltage,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32897'
+Заявка на технологическое присоединение,p_FullVoltage,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32897'
+Заявка на технологическое присоединение,dateAndTimeSendingToACCO,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,DeviceAddrCity,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound eq true
+Заявка на технологическое присоединение,DeviceAddrCity,"{'empty', 'DeviceAddrLocality', 'DeviceAddrRayon'}",,empty fields.DeviceAddrRayon and empty fields.DeviceAddrLocality
+Заявка на технологическое присоединение,PaperGPDocsList,"{'true', 'view', 'PaperGPDocsNeed'}",,fields.PaperGPDocsNeed eq true and view.viewId.contains('portal.xhtml')
+Заявка на технологическое присоединение,PaperGPDocsList,"{'true', 'view', 'PaperGPDocsNeed'}",,fields.PaperGPDocsNeed eq true and view.viewId.contains('portal.xhtml')
+Заявка на технологическое присоединение,PaperGPDocsList,"{'empty', 'PaperGPDocsList'}",,!empty fields.PaperGPDocsList
+Заявка на технологическое присоединение,ReminderDoc,{'false'},,false
+Заявка на технологическое присоединение,sign_ScanActTU_User,"{'empty', 'contains', 'isSimpleTPScheme', 'securityDataProvider', 'ScanActTU', 'true', 'p_ContractTransferType', 'ApplicantType'}",,"fields.p_ContractTransferType.Code eq '7185643' and !empty securityDataProvider.loggedInUser and ['UL','IP'].contains(fields.ApplicantType.Code) and !empty fields.ScanActTU and isSimpleTPScheme ne true"
+Заявка на технологическое присоединение,sign_ScanActTU_User,"{'empty', 'isSimpleTPScheme', 'securityDataProvider', 'true', 'p_ContractTransferType', 'ScanActTU_User', 'ApplicantType'}",,securityDataProvider.hasRole('tehprisEE_User') and (fields.ApplicantType.Code eq 'IP' or fields.ApplicantType.Code eq 'UL') and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanActTU_User and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,sign_ScanActTU_User,"{'empty', 'dashboardContext', 'dataObjectController', 'ScanActTU', 'securityDataProvider', 'p_ContractTransferType'}",,!(dataObjectController.instance.objectStatus.status.code eq 'ta07_TUImplementationCheck' and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanActTU and dashboardContext.context.vis_buttonSend or securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))
+Заявка на технологическое присоединение,PaperGPDocsNeed,"{'empty', 'PaperGPDocsNeed'}",,!empty fields.PaperGPDocsNeed
+Заявка на технологическое присоединение,FileLabel,{'true'},,true
+Заявка на технологическое присоединение,date_ogrn_ip,{'ApplicantType'},,fields.ApplicantType.Code eq 'IP'
+Заявка на технологическое присоединение,DULorgan,{'ApplicantType'},,fields.ApplicantType.Code eq 'FL' or fields.ApplicantType.Code eq 'IP'
+Заявка на технологическое присоединение,DULorgan,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,DULorgan,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,Apartmentaddr,{'true'},,true
+Заявка на технологическое присоединение,Apartmentaddr,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,RedresentDocType,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,SendDate,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,p_EarlierVoltage,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' and fields['p_ReasonTP'].Code eq '956'
+Заявка на технологическое присоединение,p_EarlierVoltage,"{'empty', '0', 'fields', 'not'}",,not empty fields['EarlierPowerD'] and fields['EarlierPowerD'] ne 0
+Заявка на технологическое присоединение,ogrnIP,{'ApplicantType'},,fields.ApplicantType.Code eq 'IP'
+Заявка на технологическое присоединение,GardenTP,"{'Code', 'fields', 'ApplicantType'}",,fields['p_TypeTP'].Code eq '32880' and fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,ContractDatePerfomance,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,p_fskException,"{'value', 'fields', 'id'}",,fields['Filial'].fields['Region'].value.id eq fields['Region'].id and fields['Filial'].fields['Organization'].value.fields['Code'].value eq 'fsk'
+Заявка на технологическое присоединение,p_fskException,"{'value', 'fields', 'id'}",,fields['Filial'].fields['Region'].value.id eq fields['Region'].id and fields['Filial'].fields['Organization'].value.fields['Code'].value eq 'fsk'
+Заявка на технологическое присоединение,TimeTPLimit,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896' and fields['p_TimeTPType'].Code eq '32881'
+Заявка на технологическое присоединение,TimeTPLimit,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896' and fields['p_TimeTPType'].Code eq '32881'
+Заявка на технологическое присоединение,PaperSODocsSendDate,"{'PaperSODocsSend', 'true'}",,fields.PaperSODocsSend eq true
+Заявка на технологическое присоединение,PaperSODocsSendDate,"{'PaperSODocsSend', 'true'}",,fields.PaperSODocsSend eq true
+Заявка на технологическое присоединение,DULDoc,{'ApplicantType'},,fields.ApplicantType.Code eq 'FL' or fields.ApplicantType.Code eq 'IP'
+Заявка на технологическое присоединение,DULDoc,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,DULDoc,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')) or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,RedresentMiddleName,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,AreaaddrFact,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,AreaaddrFact,{'true'},,true
+Заявка на технологическое присоединение,AreaaddrFact,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,ContractDateConfirm,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,ClaimTP,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,contractGPDate,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,contractGPDate,"{'dataObjectController', 'empty', 'view', 'contractGPDate'}",,view.viewId.contains('portal.xhtml') and !empty fields.contractGPDate  or  (dataObjectController.instance.objectStatus.status.code eq 'ta10_ContractExecuted'  or dataObjectController.instance.objectStatus.status.code eq 'ta04_Canceled'  or dataObjectController.instance.objectStatus.status.code eq 'ta11_ContractTerminated' )
+Заявка на технологическое присоединение,contractGPDate,{'formUtilFunctions'},,formUtilFunctions.currentDate()
+Заявка на технологическое присоединение,Result,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,SignDocGP,"{'ApplicantType', 'contains', 'fields', 'true'}",,fields['SignFL'] eq true or ['UL'].contains(fields.ApplicantType.Code)
+Заявка на технологическое присоединение,designDoc,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,RegistrULDoc,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,RegistrULDoc,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,garageSprav,"{'securityDataProvider', 'garageTP', 'view', 'true'}",,fields.garageTP eq true and (view.viewId.contains('portal.xhtml') or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')))
+Заявка на технологическое присоединение,garageSprav,"{'garageTP', 'view', 'true'}",,fields.garageTP eq true and view.viewId.contains('portal.xhtml')
+Заявка на технологическое присоединение,ApprovalTP,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,Recipient,{'false'},,false
+Заявка на технологическое присоединение,sign_ScanActTP_User,"{'empty', 'ScanActTP', 'contains', 'isSimpleTPScheme', 'securityDataProvider', 'true', 'p_ContractTransferType', 'ApplicantType'}",,"fields.p_ContractTransferType.Code eq '7185643' and !empty securityDataProvider.loggedInUser and ['UL','IP'].contains(fields.ApplicantType.Code) and !empty fields.ScanActTP and isSimpleTPScheme ne true"
+Заявка на технологическое присоединение,sign_ScanActTP_User,"{'empty', 'ScanActTP_User', 'isSimpleTPScheme', 'securityDataProvider', 'true', 'p_ContractTransferType', 'ApplicantType'}",,securityDataProvider.hasRole('tehprisEE_User') and (fields.ApplicantType.Code eq 'IP' or fields.ApplicantType.Code eq 'UL') and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanActTP_User and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,sign_ScanActTP_User,"{'empty', 'dashboardContext', 'ScanActTP', 'dataObjectController', 'securityDataProvider', 'p_ContractTransferType'}",,!(dataObjectController.instance.objectStatus.status.code eq 'ta09_ActsSigning' and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanActTP and dashboardContext.context.vis_buttonSend or securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))
+Заявка на технологическое присоединение,SignDoc,"{'ApplicantType', 'contains', 'fields', 'true'}",,fields['SignFL'] eq true or ['UL'].contains(fields.ApplicantType.Code)
+Заявка на технологическое присоединение,_region,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,_region,"{'empty', 'securityDataProvider', 'id'}",,securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,_region,{'true'},,true
+Заявка на технологическое присоединение,_region,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,RegionNotEquals,"{'fiasDeviceAddr', 'empty', 'DeviceAddrNotFound', 'DeviceAddrRegionRef', 'false', 'true', 'Region', 'p_DeviceAddrMatchWith'}",,(fields.p_DeviceAddrMatchWith.Code eq '32886' and fields.DeviceAddrNotFound ne true and empty fields.fiasDeviceAddr.address) ? false : (!empty fields.DeviceAddrRegionRef and fields.DeviceAddrRegionRef ne fields.Region)
+Заявка на технологическое присоединение,sign_TempTPDoc_SO,{'false'},,false
+Заявка на технологическое присоединение,ConstituentDoc,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,ConstituentDoc,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,DeviceAddrHouse,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound eq true
+Заявка на технологическое присоединение,DeviceAddrHouse,{'false'},,false
+Заявка на технологическое присоединение,GPPriceCategory,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.value.fields.Code eq 'FL'
+Заявка на технологическое присоединение,GPPriceCategory,"{'isSimpleTPScheme', 'view', 'true'}",,fields.isSimpleTPScheme eq true and view.viewId.contains('portal.xhtml')
+Заявка на технологическое присоединение,RedresentDoc,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,DateTUCorrectApplicant,"{'empty', '_Status', 'TUCompanyCommentDoc'}",,fields._Status eq 'ta07_TUImplementationCheck' and !empty fields.TUCompanyCommentDoc
+Заявка на технологическое присоединение,DateTUCorrectApplicant,"{'empty', 'dashboardContext', 'TUCompanyCommentDoc', 'dataObjectController', 'securityDataProvider'}",,securityDataProvider.hasRole('tehprisEE_User') and dataObjectController.instance.objectStatus.status.code eq 'ta07_TUImplementationCheck' and !empty fields.TUCompanyCommentDoc and dashboardContext.context.vis_buttonSend
+Заявка на технологическое присоединение,DateTUCorrectApplicant,"{'empty', 'dashboardContext', 'ScanActTU'}",,!empty fields.ScanActTU and dashboardContext.context.vis_buttonSend
+Заявка на технологическое присоединение,p_assoTPPortalProccessResult,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,UninhabitedTP,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,ScanActTP_User,"{'empty', 'securityDataProvider', 'isSimpleTPScheme', 'true'}",,!empty securityDataProvider.loggedInUser and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,ScanActTP_User,"{'empty', 'ScanActTP', 'isSimpleTPScheme', 'securityDataProvider', 'true'}",,securityDataProvider.hasRole('tehprisEE_User') and !empty fields.ScanActTP and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,ScanActTP_User,"{'empty', 'dashboardContext', 'ScanActTP', 'dataObjectController', 'securityDataProvider', 'p_ContractTransferType'}",,!(dataObjectController.instance.objectStatus.status.code eq 'ta09_ActsSigning' and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanActTP and dashboardContext.context.vis_buttonSend or securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))
+Заявка на технологическое присоединение,RedresentLastName,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,CorAccount,{'ApplicantType'},,fields.ApplicantType.Code eq 'UL'
+Заявка на технологическое присоединение,ScanActTU_User,"{'empty', 'securityDataProvider', 'isSimpleTPScheme', 'true'}",,!empty securityDataProvider.loggedInUser and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,ScanActTU_User,"{'empty', 'isSimpleTPScheme', 'securityDataProvider', 'ScanActTU', 'true'}",,securityDataProvider.hasRole('tehprisEE_User') and !empty fields.ScanActTU and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,ScanActTU_User,"{'empty', 'dashboardContext', 'dataObjectController', 'ScanActTU', 'securityDataProvider', 'p_ContractTransferType'}",,!(dataObjectController.instance.objectStatus.status.code eq 'ta07_TUImplementationCheck' and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanActTU and dashboardContext.context.vis_buttonSend or securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))
+Заявка на технологическое присоединение,cBuildingaddrReg,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,cBuildingaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,Comment,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,CondominiumAgreeDoc,"{'Code', 'fields', 'true'}",,fields['UninhabitedTP'] eq true and fields['p_IndividualInputSwitching'].Code eq '29686'
+Заявка на технологическое присоединение,CondominiumAgreeDoc,"{'Code', 'fields', 'true'}",,fields['UninhabitedTP'] eq true and fields['p_IndividualInputSwitching'].Code eq '29686'
+Заявка на технологическое присоединение,ActTUApplicantRefuse,"{'empty', 'dashboardContext', 'dataObjectController', 'isApplRefuseActTU', 'ScanActTU', 'true'}",,fields.isApplRefuseActTU eq true and dataObjectController.instance.objectStatus.status.code eq 'ta07_TUImplementationCheck' and !empty fields.ScanActTU and dashboardContext.context.vis_buttonSend
+Заявка на технологическое присоединение,DeviceAddrRegionRef,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound eq true
+Заявка на технологическое присоединение,DeviceAddrRegionRef,"{'Code', 'fields'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886'
+Заявка на технологическое присоединение,EVLabel,"{'empty', 'dataObjectController', 'isSimpleTPScheme', 'id', 'true', 'view'}",,fields.isSimpleTPScheme eq true and view.viewId.contains('portal.xhtml') and (empty fields.id or (dataObjectController.instance.objectStatus.status.code eq 'ta03_Paused'))
+Заявка на технологическое присоединение,NetworkCompany,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896' and fields['p_TimeTPType'].Code eq '32898'
+Заявка на технологическое присоединение,NetworkCompany,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896' and fields['p_TimeTPType'].Code eq '32898'
+Заявка на технологическое присоединение,RequestVersion,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,KPPGP,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.Code eq 'FL'
+Заявка на технологическое присоединение,KPPGP,"{'KPPGP', 'empty'}",,!empty fields.KPPGP
+Заявка на технологическое присоединение,due,{'securityDataProvider'},,!securityDataProvider.hasRole('tehprisEE_User') or securityDataProvider.hasRole('admin')
+Заявка на технологическое присоединение,refuseText,{'StatusGP'},,fields.StatusGP.value.fields.Code eq 'refuse'
+Заявка на технологическое присоединение,HeadPostString,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,p_GenerationType,"{'Code', 'fields', 'ApplicantType'}",,((fields.ApplicantType.value.fields.Code eq 'IP' or fields.ApplicantType.value.fields.Code eq 'UL' and fields['p_TypeTP'].Code eq '32880') or fields['p_TypeTP'].Code eq '32896') and fields['p_TypeOfLoad'].Code eq '57000'
+Заявка на технологическое присоединение,p_GenerationType,"{'Code', 'fields', 'ApplicantType'}",,((fields.ApplicantType.value.fields.Code eq 'IP' or fields.ApplicantType.value.fields.Code eq 'UL' and fields['p_TypeTP'].Code eq '32880') or fields['p_TypeTP'].Code eq '32896') and fields['p_TypeOfLoad'].Code eq '57000'
+Заявка на технологическое присоединение,fiasDeviceAddr,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound ne true
+Заявка на технологическое присоединение,fiasDeviceAddr,"{'dataObjectController', 'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP') or (empty fields.id or dataObjectController.instance.objectStatus.status.code eq 'ta03_Paused'))
+Заявка на технологическое присоединение,SignDocName,"{'Code', 'fields', 'true'}",,fields['p_SignDocType'].Code eq '32895' and (fields['SignFL'] eq true or fields['SignUL'] eq true)
+Заявка на технологическое присоединение,SignDocName,"{'Code', 'fields', 'true'}",,fields['p_SignDocType'].Code eq '32895' and (fields['SignFL'] eq true or fields['SignUL'] eq true)
+Заявка на технологическое присоединение,BankName,{'ApplicantType'},,fields.ApplicantType.Code eq 'UL'
+Заявка на технологическое присоединение,TuDoc,"{'empty', 'p_ContractTransferType', 'TuDoc', 'isSimpleTPScheme', 'ApplicantType', 'true', 'contains', 'view', 'isApplicantRefuse'}",,view.viewId.contains('portal.xhtml') and fields.isApplicantRefuse ne true and fields.p_ContractTransferType.Code eq '7185643' and ['FL'].contains(fields.ApplicantType.Code) and !empty fields.TuDoc and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,TuDoc,"{'empty', 'securityDataProvider', 'isSimpleTPScheme', 'true'}",,!empty securityDataProvider.loggedInUser and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,AddAgreementDate,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,PersDataAgreeDoc,{'false'},,false
+Заявка на технологическое присоединение,NetworkContractNum,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896' and fields['p_TimeTPType'].Code eq '32898'
+Заявка на технологическое присоединение,NetworkContractNum,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896' and fields['p_TimeTPType'].Code eq '32898'
+Заявка на технологическое присоединение,StatusGP,"{'empty', 'ElectroCompany3'}",,!empty fields.ElectroCompany3
+Заявка на технологическое присоединение,RegionaddrFactRef,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,RegionaddrFactRef,"{'empty', 'securityDataProvider', 'id'}",,securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,RegionaddrFactRef,{'true'},,true
+Заявка на технологическое присоединение,RegionaddrFactRef,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,Corpaddr,{'true'},,true
+Заявка на технологическое присоединение,Corpaddr,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,GardenPersData,"{'securityDataProvider', 'view', 'GardenTP', 'true'}",,fields.GardenTP eq true and (view.viewId.contains('portal.xhtml') or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')))
+Заявка на технологическое присоединение,SingleLineSchemeDoc,"{'contains', 'p_FullVoltage'}",,"['56991','56992','56993','56994'].contains(fields.p_FullVoltage.Code)"
+Заявка на технологическое присоединение,ScanDopDogovorUser,"{'empty', 'ScanDopDogovor', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser and !empty fields.ScanDopDogovor
+Заявка на технологическое присоединение,ScanDopDogovorUser,"{'empty', 'ScanDopDogovor', 'securityDataProvider', 'p_ContractTransferType'}",,securityDataProvider.hasRole('tehprisEE_User') and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanDopDogovor
+Заявка на технологическое присоединение,ScanDopDogovorUser,"{'empty', 'dashboardContext', 'dataObjectController', 'ScanDopDogovor', 'securityDataProvider', 'p_ContractTransferType'}",,(!(dataObjectController.instance.objectStatus.status.code eq 'ta05_ContractOnReviewApplicant' and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanDopDogovor and( dashboardContext.context.vis_buttonSend or securityDataProvider.hasRole('tehprisEE_ZayavkaTP') ))) or (securityDataProvider.hasRole('tehprisEE_GpWork') or securityDataProvider.hasRole('tehprisEE_GpAdmin'))
+Заявка на технологическое присоединение,HeadMiddleName,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,p_CapacitySort,"{'empty', 'securityDataProvider', 'fields', 'p_CapacitySort', 'Code', 'ApplicantType'}",,(fields.ApplicantType.value.fields.Code eq 'IP' or fields.ApplicantType.value.fields.Code eq 'UL') and fields['p_TypeTP'].Code eq '32880' and(!empty fields.p_CapacitySort or !(securityDataProvider.hasRole('tehprisEE_User') and !securityDataProvider.hasRole('admin')))
+Заявка на технологическое присоединение,p_CapacitySort,"{'empty', 'p_CapacitySort2', 'fields', 'contains', 'Code', 'ApplicantType'}",,"['IP','UL'].contains(fields.ApplicantType.value.fields.Code) and fields['p_TypeTP'].Code eq '32880' and empty fields.p_CapacitySort2"
+Заявка на технологическое присоединение,ActTPApplicantRefuse,"{'empty', 'isApplRefuseActTP', 'ScanActTP', 'dashboardContext', 'dataObjectController', 'true'}",,fields.isApplRefuseActTP eq true and dataObjectController.instance.objectStatus.status.code eq 'ta09_ActsSigning' and !empty fields.ScanActTP and dashboardContext.context.vis_buttonSend
+Заявка на технологическое присоединение,ScanNotificationLetterCl,"{'empty', 'securityDataProvider', 'isSimpleTPScheme', 'true'}",,!empty securityDataProvider.loggedInUser and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,ScanNotificationLetterCl,"{'empty', 'DateCompTechnical_applicant', 'dataObjectController', 'DateCompTechnical_Company', 'isSimpleTPScheme', 'securityDataProvider', 'true', 'not'}",,securityDataProvider.hasRole('tehprisEE_User') and dataObjectController.instance.objectStatus.status.code eq 'ContractSigned' and not empty fields.DateCompTechnical_Company and empty fields.DateCompTechnical_applicant and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,ScanNotificationLetterCl,"{'empty', 'DateCompTechnical_applicant', 'dashboardContext', 'dataObjectController', 'DateCompTechnical_Company', 'securityDataProvider'}",,(securityDataProvider.hasRole('tehprisEE_User') and !(dataObjectController.instance.objectStatus.status.code eq 'ta06_ContractSigned' and !empty fields.DateCompTechnical_Company and !empty fields.DateCompTechnical_applicant and dashboardContext.context.vis_buttonSend)) or  (dataObjectController.instance.objectStatus.status.code eq 'ta10_ContractExecuted'  or dataObjectController.instance.objectStatus.status.code eq 'ta04_Canceled'  or dataObjectController.instance.objectStatus.status.code eq 'ta11_ContractTerminated' )
+Заявка на технологическое присоединение,sign_TuDoc_SO,"{'empty', 'securityDataProvider', 'isSimpleTPScheme', 'true'}",,!empty securityDataProvider.loggedInUser and isSimpleTPScheme ne true
+Заявка на технологическое присоединение,sign_TuDoc_SO,"{'empty', 'p_ContractTransferType', 'TuDoc'}",,fields.p_ContractTransferType.Code eq '7185643' and !empty fields.TuDoc
+Заявка на технологическое присоединение,Code,{'false'},,false
+Заявка на технологическое присоединение,buttonContDraft,"{'dataObjectController', 'empty'}",,!dataObjectController.managed and dataObjectController.instance.metaObject.attributes.get('drafts') and !empty dataObjectController.formDraft
+Заявка на технологическое присоединение,ContractCost,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,isApplicantRefuse,"{'empty', 'ScanDogovor', '_Status', 'Login', 'ScanDogovorCL', 'ScanDopDogovor', 'securityDataProvider', 'ScanDopDogovorUser'}",,fields.Login eq securityDataProvider.loggedInUser.loginName and fields._Status eq 'ta05_ContractOnReviewApplicant' and ((!empty fields.ScanDogovor and empty fields.ScanDogovorCL) or (!empty fields.ScanDopDogovor and empty fields.ScanDopDogovorUser))
+Заявка на технологическое присоединение,isApplicantRefuse,"{'dataObjectController', '_Status', 'Login', 'securityDataProvider', 'false'}",,(false and( fields.Login ne securityDataProvider.loggedInUser.loginName or fields._Status ne 'ta05_ContractOnReviewApplicant' )) or  (dataObjectController.instance.objectStatus.status.code eq 'ta10_ContractExecuted'  or dataObjectController.instance.objectStatus.status.code eq 'ta04_Canceled'  or dataObjectController.instance.objectStatus.status.code eq 'ta11_ContractTerminated' )
+Заявка на технологическое присоединение,ScanREOAct,{'false'},,false
+Заявка на технологическое присоединение,invoiceTP,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,invoiceTP,"{'dataObjectController', 'isSimpleTPScheme', 'securityDataProvider', 'true'}",,securityDataProvider.hasRole('tehprisEE_ZayavkaTP') and fields.isSimpleTPScheme eq true and dataObjectController.instance.objectStatus.status.code eq 'ta02_Accepted'
+Заявка на технологическое присоединение,HouseaddrFact,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,HouseaddrFact,{'true'},,true
+Заявка на технологическое присоединение,HouseaddrFact,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') and empty fields.id
+Заявка на технологическое присоединение,HouseaddrFact,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,DateActBooking,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,GardenSprav,"{'securityDataProvider', 'view', 'GardenTP', 'true'}",,fields.GardenTP eq true and (view.viewId.contains('portal.xhtml') or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')))
+Заявка на технологическое присоединение,PersDataAgree,{'true'},,true
+Заявка на технологическое присоединение,sign_TuDoc_appl,"{'empty', 'TuDoc', 'contains', 'isSimpleTPScheme', 'securityDataProvider', 'ApplicantType', 'true', 'p_ContractTransferType', 'isApplicantRefuse'}",,"!empty securityDataProvider.loggedInUser and fields.isApplicantRefuse ne true and fields.p_ContractTransferType.Code eq '7185643' and ['UL','IP'].contains(fields.ApplicantType.Code) and !empty fields.TuDoc and isSimpleTPScheme ne true"
+Заявка на технологическое присоединение,sign_TuDoc_appl,"{'empty', 'TuDoc', 'securityDataProvider', 'p_ContractTransferType', 'ApplicantType'}",,securityDataProvider.hasRole('tehprisEE_User') and (fields.ApplicantType.Code eq 'IP' or fields.ApplicantType.Code eq 'UL') and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.TuDoc
+Заявка на технологическое присоединение,INNGP,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.Code eq 'FL'
+Заявка на технологическое присоединение,INNGP,"{'empty', 'INNGP'}",,!empty fields.INNGP
+Заявка на технологическое присоединение,sign_unLegalConsumptionNotification_SO,{'false'},,false
+Заявка на технологическое присоединение,ApplicationDoc,{'true'},,true
+Заявка на технологическое присоединение,DZOInfoLabel,{'view'},,view.viewId.contains('portal.xhtml')
+Заявка на технологическое присоединение,buttonBack,"{'empty', 'id'}",,!empty fields.id
+Заявка на технологическое присоединение,PostAddrType,{'false'},,false
+Заявка на технологическое присоединение,DateCompTechnical_applicant,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,DateCompTechnical_applicant,"{'empty', 'dashboardContext', 'dataObjectController', 'DateCompTechnical_Company', 'securityDataProvider'}",,securityDataProvider.hasRole('tehprisEE_User') and dataObjectController.instance.objectStatus.status.code eq 'ta06_ContractSigned' and !empty fields.DateCompTechnical_Company and dashboardContext.context.vis_buttonSend
+Заявка на технологическое присоединение,DateCompTechnical_applicant,"{'empty', 'dashboardContext', 'dataObjectController', 'DateCompTechnical_Company', 'securityDataProvider'}",,(securityDataProvider.hasRole('tehprisEE_User') and !(dataObjectController.instance.objectStatus.status.code eq 'ta06_ContractSigned' and !empty fields.DateCompTechnical_Company and dashboardContext.context.vis_buttonSend)) or  (dataObjectController.instance.objectStatus.status.code eq 'ta10_ContractExecuted'  or dataObjectController.instance.objectStatus.status.code eq 'ta04_Canceled'  or dataObjectController.instance.objectStatus.status.code eq 'ta11_ContractTerminated' )
+Заявка на технологическое присоединение,p_ReliabilityCategory,"{'Code', 'fields'}",,(fields['p_TypeTP'].Code eq '32880') or (fields['p_TypeTP'].Code eq '32896')
+Заявка на технологическое присоединение,p_ReliabilityCategory,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,p_ReliabilityCategory,"{'empty', 'dataObjectController', 'securityDataProvider', 'fields', 'id', 'Code'}",,(fields['p_TypeTP'].Code eq '32896' or (fields['p_TypeTP'].Code eq '32880' and securityDataProvider.hasRole('tehprisEE_User') and !(dataObjectController.instance.objectStatus.status.code eq 'ta03_Paused' or empty fields.id))) or (dataObjectController.instance.objectStatus.status.code eq 'ta10_ContractExecuted'  or dataObjectController.instance.objectStatus.status.code eq 'ta04_Canceled'  or dataObjectController.instance.objectStatus.status.code eq 'ta11_ContractTerminated' )
+Заявка на технологическое присоединение,ContractDateSend,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,p_TypeOfLoad,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32896'
+Заявка на технологическое присоединение,p_TypeOfLoad,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32896'
+Заявка на технологическое присоединение,DZO,"{'empty', 'securityDataProvider', 'id'}",,securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and !securityDataProvider.hasRole('admin') and empty fields.id
+Заявка на технологическое присоединение,DZO,{'true'},,true
+Заявка на технологическое присоединение,ScanNotificationLetter,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,Areaaddr,{'true'},,true
+Заявка на технологическое присоединение,Areaaddr,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,DateProjectGPLoad,{'true'},,true
+Заявка на технологическое присоединение,DULdate,{'ApplicantType'},,fields.ApplicantType.Code eq 'FL' or fields.ApplicantType.Code eq 'IP'
+Заявка на технологическое присоединение,DULdate,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,DULdate,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,AddrDescript,"{'Code', 'fields', 'DeviceAddrNotFound', 'true'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and (fields['AddrUndefined'] eq true or fields.DeviceAddrNotFound eq true)
+Заявка на технологическое присоединение,BoroughaddrReg,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,BoroughaddrReg,{'true'},,true
+Заявка на технологическое присоединение,BoroughaddrReg,"{'empty', 'CityaddrReg', 'BoroughaddrReg'}",,empty fields.BoroughaddrReg and empty fields.CityaddrReg
+Заявка на технологическое присоединение,BoroughaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,sign_ScanNotificationLetterCl_appl,"{'empty', 'contains', 'isSimpleTPScheme', 'securityDataProvider', 'ScanNotificationLetterCl', 'true', 'p_ContractTransferType', 'ApplicantType'}",,"fields.p_ContractTransferType.Code eq '7185643' and !empty securityDataProvider.loggedInUser and ['UL','IP'].contains(fields.ApplicantType.Code) and !empty fields.ScanNotificationLetterCl and isSimpleTPScheme ne true"
+Заявка на технологическое присоединение,sign_ScanNotificationLetterCl_appl,"{'empty', 'securityDataProvider', 'ScanNotificationLetterCl', 'p_ContractTransferType', 'ApplicantType'}",,securityDataProvider.hasRole('tehprisEE_User') and (fields.ApplicantType.Code eq 'IP' or fields.ApplicantType.Code eq 'UL') and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanNotificationLetterCl
+Заявка на технологическое присоединение,EarlierPowerD,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' and (fields['p_ReasonTP'].Code eq '956' or fields['p_ReasonTP'].Code eq '958' or fields['p_ReasonTP'].Code eq '959' or fields['p_ReasonTP'].Code eq '960')
+Заявка на технологическое присоединение,EarlierPowerD,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' and fields['p_ReasonTP'].Code eq '956'
+Заявка на технологическое присоединение,SignUL,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,CityaddrFact,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,CityaddrFact,{'true'},,true
+Заявка на технологическое присоединение,CityaddrFact,"{'BoroughaddrFact', 'empty', 'CityaddrFact'}",,empty fields.BoroughaddrFact and empty fields.CityaddrFact
+Заявка на технологическое присоединение,CityaddrFact,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,firstName,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,DeviceAddrRayon,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound eq true
+Заявка на технологическое присоединение,ogrnGP,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.Code eq 'FL'
+Заявка на технологическое присоединение,ogrnGP,"{'empty', 'ogrnGP'}",,!empty fields.ogrnGP
+Заявка на технологическое присоединение,Region,{'true'},,true
+Заявка на технологическое присоединение,Region,{'true'},,true
+Заявка на технологическое присоединение,Region,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')) or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,ReasonCancelContract,{'AddAgreementReason'},,(fields.AddAgreementReason.Code eq '11')
+Заявка на технологическое присоединение,ReasonCancelContract,"{'dashboardContext', 'securityDataProvider', 'AddAgreementReason'}",,(fields.AddAgreementReason.Code eq '11') and( dashboardContext.context.vis_buttonSend or securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))
+Заявка на технологическое присоединение,OwnershipDoc,"{'Code', 'fields'}",,(fields['p_TypeTP'].Code eq '32880') or (fields['p_TypeTP'].Code eq '32896')
+Заявка на технологическое присоединение,OwnershipDoc,"{'Code', 'fields'}",,(fields['p_TypeTP'].Code eq '32880') or (fields['p_TypeTP'].Code eq '32896')
+Заявка на технологическое присоединение,sign_ScanDogovor,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,sign_ScanDogovor,"{'empty', 'ScanDogovor', 'p_ContractTransferType'}",,fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanDogovor
+Заявка на технологическое присоединение,recallApplReason,"{'recallAppl', 'view', 'true'}",,view.viewId.contains('portal.xhtml') and fields.recallAppl eq true
+Заявка на технологическое присоединение,recallApplReason,"{'recallAppl', 'view', 'true'}",,fields.recallAppl eq true and view.viewId.contains('portal.xhtml')
+Заявка на технологическое присоединение,OtherContractType,"{'Code', 'fields'}",,fields['p_ContractType'].Code eq '32900' and (fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32896')
+Заявка на технологическое присоединение,OtherContractType,"{'Code', 'fields'}",,fields['p_ContractType'].Code eq '32900' and (fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32896')
+Заявка на технологическое присоединение,SignDocDate,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,SignDocDate,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,ScanDopDogovor,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,RedresentDocNum,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,middleName,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,nameOrg,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,ApartmentaddrFact,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,ApartmentaddrFact,{'true'},,true
+Заявка на технологическое присоединение,ApartmentaddrFact,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,Account,{'ApplicantType'},,fields.ApplicantType.Code eq 'UL'
+Заявка на технологическое присоединение,sign_designDoc_appl,"{'empty', 'ApplicantType', 'contains', 'view', 'designDoc'}",,"view.viewId.contains('portal.xhtml') and ['UL','IP'].contains(fields.ApplicantType.Code) and !empty fields.designDoc"
+Заявка на технологическое присоединение,DeviceAddrCorp,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound eq true
+Заявка на технологическое присоединение,BIKGP,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.Code eq 'FL'
+Заявка на технологическое присоединение,BIKGP,"{'empty', 'securityDataProvider', 'BIKGP', 'view'}",,!empty fields.BIKGP and securityDataProvider.hasRole('tehprisEE_GpWorkP') or view.viewId.contains('portal.xhtml') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP')
+Заявка на технологическое присоединение,SignLastName,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,SignLastName,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,DULnum,{'ApplicantType'},,fields.ApplicantType.Code eq 'FL' or fields.ApplicantType.Code eq 'IP'
+Заявка на технологическое присоединение,DULnum,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,DULnum,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,p_DeviceAddrMatchWith,{'true'},,true
+Заявка на технологическое присоединение,p_DeviceAddrMatchWith,"{'empty', 'p_DeviceAddrMatchWith', 'ApplicantType'}",,empty fields.p_DeviceAddrMatchWith ? ( fields.ApplicantType.Code eq 'FL' or fields.ApplicantType.Code eq 'IP' ? '32924' : (fields.ApplicantType.Code eq 'UL' ? '32926' :  fields.p_DeviceAddrMatchWith) ) : fields.p_DeviceAddrMatchWith
+Заявка на технологическое присоединение,notificationDateDocMiss,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,ApplAccountGP,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.Code eq 'FL'
+Заявка на технологическое присоединение,ApplAccountGP,"{'empty', 'ApplAccountGP', 'securityDataProvider', 'view'}",,!empty fields.ApplAccountGP and securityDataProvider.hasRole('tehprisEE_GpWorkP') or view.viewId.contains('portal.xhtml') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP')
+Заявка на технологическое присоединение,lowVoltageTP,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,StagesTP,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,StagesTP,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,p_ContractType,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32896'
+Заявка на технологическое присоединение,Login,{'securityDataProvider'},,securityDataProvider.loggedInUser.loginName eq 'admin'
+Заявка на технологическое присоединение,RejoinsPowerD,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32896'
+Заявка на технологическое присоединение,RejoinsPowerD,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32880' or fields['p_TypeTP'].Code eq '32896'
+Заявка на технологическое присоединение,HouseaddrReg,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,HouseaddrReg,{'true'},,true
+Заявка на технологическое присоединение,HouseaddrReg,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') and empty fields.id
+Заявка на технологическое присоединение,HouseaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,lastName,"{'empty', 'securityDataProvider', 'id'}",,(empty securityDataProvider.loggedInUser or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')) or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))) and empty fields.id
+Заявка на технологическое присоединение,Description,{'false'},,false
+Заявка на технологическое присоединение,cBuildingaddr,"{'empty', 'securityDataProvider', 'sessionContext'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty sessionContext.get('accession_user'))
+Заявка на технологическое присоединение,EPUPowerDoc,"{'Code', 'fields', 'true'}",,fields['p_TypeTP'].Code eq '32880' and fields['EmergencyControl'] eq true
+Заявка на технологическое присоединение,EPUPowerDoc,"{'Code', 'fields', 'true'}",,fields['p_TypeTP'].Code eq '32880' and fields['EmergencyControl'] eq true
+Заявка на технологическое присоединение,sign_ScanDopDogovorUser,"{'empty', 'ScanDopDogovor', 'securityDataProvider', 'p_ContractTransferType', 'contains', 'ApplicantType'}",,"!empty securityDataProvider.loggedInUser and fields.p_ContractTransferType.Code eq '7185643' and ['UL','IP'].contains(fields.ApplicantType.Code) and !empty fields.ScanDopDogovor"
+Заявка на технологическое присоединение,sign_ScanDopDogovorUser,"{'empty', 'securityDataProvider', 'ScanDopDogovorUser', 'p_ContractTransferType', 'ApplicantType'}",,securityDataProvider.hasRole('tehprisEE_User') and (fields.ApplicantType.Code eq 'IP' or fields.ApplicantType.Code eq 'UL') and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanDopDogovorUser
+Заявка на технологическое присоединение,sign_ScanDopDogovorUser,"{'empty', 'dashboardContext', 'dataObjectController', 'ScanDopDogovor', 'securityDataProvider', 'p_ContractTransferType'}",,(!(dataObjectController.instance.objectStatus.status.code eq 'ta05_ContractOnReviewApplicant' and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanDopDogovor and( dashboardContext.context.vis_buttonSend or securityDataProvider.hasRole('tehprisEE_ZayavkaTP') ))) or (securityDataProvider.hasRole('tehprisEE_GpWork') or securityDataProvider.hasRole('tehprisEE_GpAdmin'))
+Заявка на технологическое присоединение,CorpaddrFact,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,CorpaddrFact,{'true'},,true
+Заявка на технологическое присоединение,CorpaddrFact,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,StatementNumber,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,RedresentFirstName,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,DeviceAddrFlat,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound eq true
+Заявка на технологическое присоединение,sign_ScanDogovorCL,"{'empty', 'ScanDogovor', 'securityDataProvider', 'p_ContractTransferType', 'contains', 'ApplicantType'}",,"!empty securityDataProvider.loggedInUser and fields.p_ContractTransferType.Code eq '7185643' and ['UL','IP'].contains(fields.ApplicantType.Code) and !empty fields.ScanDogovor"
+Заявка на технологическое присоединение,sign_ScanDogovorCL,"{'empty', 'ScanDogovorCL', 'securityDataProvider', 'p_ContractTransferType', 'ApplicantType'}",,securityDataProvider.hasRole('tehprisEE_User') and (fields.ApplicantType.Code eq 'IP' or fields.ApplicantType.Code eq 'UL') and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanDogovorCL
+Заявка на технологическое присоединение,sign_ScanDogovorCL,"{'empty', 'ScanDogovor', 'dashboardContext', 'dataObjectController', 'securityDataProvider', 'p_ContractTransferType'}",,(!(dataObjectController.instance.objectStatus.status.code eq 'ta05_ContractOnReviewApplicant' and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanDogovor and( dashboardContext.context.vis_buttonSend or securityDataProvider.hasRole('tehprisEE_ZayavkaTP') ))) or (securityDataProvider.hasRole('tehprisEE_GpWork') or securityDataProvider.hasRole('tehprisEE_GpAdmin'))
+Заявка на технологическое присоединение,DeviceName,{'true'},,true
+Заявка на технологическое присоединение,WarningFAS_TP,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,ContractNumber,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,ScanActBooking,"{'empty', 'ScanActBooking', 'p_ContractTransferType', 'contains', 'view', 'ApplicantType'}",,view.viewId.contains('portal.xhtml') and fields.p_ContractTransferType.Code eq '7185643' and ['FL'].contains(fields.ApplicantType.Code) and !empty fields.ScanActBooking
+Заявка на технологическое присоединение,ScanActBooking,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,TuDoc_appl,"{'empty', 'TuDoc', 'securityDataProvider', 'true', 'isApplicantRefuse'}",,!empty securityDataProvider.loggedInUser and fields.isApplicantRefuse ne true and !empty fields.TuDoc
+Заявка на технологическое присоединение,TuDoc_appl,"{'empty', 'securityDataProvider', 'TuDoc', 'p_ContractTransferType'}",,securityDataProvider.hasRole('tehprisEE_User') and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.TuDoc and !securityDataProvider.hasRole('admin')
+Заявка на технологическое присоединение,KPP,{'ApplicantType'},,fields.ApplicantType.Code eq 'UL'
+Заявка на технологическое присоединение,PaperSODocsNeed,"{'empty', 'PaperSODocsNeed'}",,!empty fields.PaperSODocsNeed
+Заявка на технологическое присоединение,TUApplicantComment,"{'empty', '_Status', 'TUCompanyCommentDoc'}",,fields._Status eq 'ta07_TUImplementationCheck' and !empty fields.TUCompanyCommentDoc
+Заявка на технологическое присоединение,TUApplicantComment,"{'empty', 'dashboardContext', 'TUCompanyCommentDoc', 'dataObjectController', 'securityDataProvider'}",,securityDataProvider.hasRole('tehprisEE_User') and dataObjectController.instance.objectStatus.status.code eq 'ta07_TUImplementationCheck' and !empty fields.TUCompanyCommentDoc and dashboardContext.context.vis_buttonSend
+Заявка на технологическое присоединение,TUApplicantComment,"{'empty', 'TUCompanyComment', 'ScanActTU', 'dashboardContext'}",,!empty fields.ScanActTU and !fields.TUCompanyComment.isEmptyAwareDeleted() and dashboardContext.context.vis_buttonSend
+Заявка на технологическое присоединение,TPInstruction,"{'isSimpleTPScheme', 'true'}",,fields.isSimpleTPScheme eq true
+Заявка на технологическое присоединение,TPInstruction,"{'isSimpleTPScheme', 'securityDataProvider', '_Status', 'true'}",,securityDataProvider.hasRole('tehprisEE_ZayavkaTP') and fields.isSimpleTPScheme eq true and fields._Status eq 'ta02_Accepted'
+Заявка на технологическое присоединение,RegistrIPDoc,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'IP'
+Заявка на технологическое присоединение,RegistrIPDoc,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'IP'
+Заявка на технологическое присоединение,HeadFirstName,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,CorpaddrReg,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,CorpaddrReg,{'true'},,true
+Заявка на технологическое присоединение,CorpaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,DeviceAddrStroy,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound eq true
+Заявка на технологическое присоединение,nameOrgGP,"{'isSimpleTPScheme', 'ApplicantType', 'true'}",,fields.isSimpleTPScheme eq true and fields.ApplicantType.Code eq 'FL'
+Заявка на технологическое присоединение,nameOrgGP,"{'empty', 'nameOrgGP'}",,!empty fields.nameOrgGP
+Заявка на технологическое присоединение,fskExceptionLabel,"{'value', 'fields', 'id'}",,fields['Filial'].fields['Region'].value.id eq fields['Region'].id and fields['Filial'].fields['Organization'].value.fields['Code'].value eq 'fsk'
+Заявка на технологическое присоединение,fskExceptionLabel,{'true'},,true
+Заявка на технологическое присоединение,PaperSODocsList,"{'PaperSODocsNeed', 'view', 'true'}",,fields.PaperSODocsNeed eq true and view.viewId.contains('portal.xhtml')
+Заявка на технологическое присоединение,PaperSODocsList,"{'PaperSODocsNeed', 'view', 'true'}",,fields.PaperSODocsNeed eq true and view.viewId.contains('portal.xhtml')
+Заявка на технологическое присоединение,PaperSODocsList,"{'empty', 'PaperSODocsList'}",,!empty fields.PaperSODocsList
+Заявка на технологическое присоединение,FactSupplyPower,"{'empty', 'ActualConnect', 'isSimpleTPScheme', 'true', 'FactSupplyPower', 'null'}",,!empty fields.FactSupplyPower ? FactSupplyPower : (fields.isSimpleTPScheme eq true ? fields.ActualConnect : null)
+Заявка на технологическое присоединение,isApplRefuseActTP,"{'empty', 'ScanActTP', 'ScanActTP_User', '_Status', 'Login', 'securityDataProvider', 'true'}",,true or fields.Login eq securityDataProvider.loggedInUser.loginName and fields._Status eq 'ta09_ActsSigning' and ((!empty fields.ScanActTP and empty fields.ScanActTP_User))
+Заявка на технологическое присоединение,isApplRefuseActTP,"{'dataObjectController', '_Status', 'Login', 'securityDataProvider', 'false'}",,(false and( fields.Login ne securityDataProvider.loggedInUser.loginName or fields._Status ne 'ScanActTP_User' )) or  (dataObjectController.instance.objectStatus.status.code eq 'ta10_ContractExecuted'  or dataObjectController.instance.objectStatus.status.code eq 'ta04_Canceled'  or dataObjectController.instance.objectStatus.status.code eq 'ta11_ContractTerminated' )
+Заявка на технологическое присоединение,StreetaddrFact,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,StreetaddrFact,{'true'},,true
+Заявка на технологическое присоединение,StreetaddrFact,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,StreetaddrFact,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,InterestsUL,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,DateCompTechnical_Company,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,SubBox,{'false'},,false
+Заявка на технологическое присоединение,isApplRefuseActTU,"{'empty', '_Status', 'Login', 'securityDataProvider', 'ScanActTU', 'true', 'ScanActTU_User'}",,true or fields.Login eq securityDataProvider.loggedInUser.loginName and fields._Status eq 'ta07_TUImplementationCheck' and ((!empty fields.ScanActTU and empty fields.ScanActTU_User))
+Заявка на технологическое присоединение,isApplRefuseActTU,"{'dataObjectController', '_Status', 'Login', 'securityDataProvider', 'false'}",,(false and( fields.Login ne securityDataProvider.loggedInUser.loginName or fields._Status ne 'ta07_TUImplementationCheck' )) or  (dataObjectController.instance.objectStatus.status.code eq 'ta10_ContractExecuted'  or dataObjectController.instance.objectStatus.status.code eq 'ta04_Canceled'  or dataObjectController.instance.objectStatus.status.code eq 'ta11_ContractTerminated' )
+Заявка на технологическое присоединение,IndexaddrFact,"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,IndexaddrFact,{'true'},,true
+Заявка на технологическое присоединение,IndexaddrFact,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,SignDocNum,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,SignDocNum,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,buttonSaveApplication,"{'empty', 'fields'}",,!empty fields['p_TypeTP']
+Заявка на технологическое присоединение,ClientId_Branch,{'false'},,false
+Заявка на технологическое присоединение,ScanDogovorCL,"{'empty', 'ScanDogovor', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser and !empty fields.ScanDogovor
+Заявка на технологическое присоединение,ScanDogovorCL,"{'empty', 'ScanDogovor', 'securityDataProvider', 'p_ContractTransferType'}",,securityDataProvider.hasRole('tehprisEE_User') and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanDogovor and !securityDataProvider.hasRole('admin')
+Заявка на технологическое присоединение,ScanDogovorCL,"{'empty', 'ScanDogovor', 'dashboardContext', 'dataObjectController', 'securityDataProvider', 'p_ContractTransferType'}",,(!(dataObjectController.instance.objectStatus.status.code eq 'ta05_ContractOnReviewApplicant' and fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanDogovor and( dashboardContext.context.vis_buttonSend or securityDataProvider.hasRole('tehprisEE_ZayavkaTP') ))) or (securityDataProvider.hasRole('tehprisEE_GpWork') or securityDataProvider.hasRole('tehprisEE_GpAdmin'))
+Заявка на технологическое присоединение,date_ogrn_UL,{'ApplicantType'},,fields.ApplicantType.Code eq 'UL'
+Заявка на технологическое присоединение,Houseaddr,{'true'},,true
+Заявка на технологическое присоединение,Houseaddr,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,Houseaddr,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,IdAppealDZO,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,ToleranceDate,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,ddl,{'securityDataProvider'},,!securityDataProvider.hasRole('tehprisEE_User') or securityDataProvider.hasRole('admin')
+Заявка на технологическое присоединение,DeviceAddrIndex,"{'securityDataProvider', 'null'}",,securityDataProvider.hasRole('tehprisEE_User') ? '999999' : null
+Заявка на технологическое присоединение,DeviceAddrIndex,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,fields['p_DeviceAddrMatchWith'].Code eq '32886' and fields.DeviceAddrNotFound eq true
+Заявка на технологическое присоединение,DeviceAddrIndex,"{'true', 'Code', 'fields', 'DeviceAddrNotFound'}",,(fields['p_DeviceAddrMatchWith'].Code eq '32886') and (fields.DeviceAddrNotFound ne true)
+Заявка на технологическое присоединение,NetworkContractDoc,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896' and fields['p_TimeTPType'].Code eq '32898'
+Заявка на технологическое присоединение,NetworkContractDoc,"{'Code', 'fields'}",,fields['p_TypeTP'].Code eq '32896' and fields['p_TimeTPType'].Code eq '32898'
+Заявка на технологическое присоединение,AddressLabel,"{'Code', 'fields'}",,fields['p_DeviceAddrMatchWith'].Code eq '32923' or fields['p_DeviceAddrMatchWith'].Code eq '32925' or fields['p_DeviceAddrMatchWith'].Code eq '32924' or fields['p_DeviceAddrMatchWith'].Code eq '32926' or fields['p_DeviceAddrMatchWith'].Code eq '32927'
+Заявка на технологическое присоединение,ContractTransferPlanDate,"{'empty', 'securityDataProvider'}",,!empty securityDataProvider.loggedInUser
+Заявка на технологическое присоединение,HeadLastName,{'ApplicantType'},,fields.ApplicantType.value.fields.Code eq 'UL'
+Заявка на технологическое присоединение,#{fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'},"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Фактический адрес' : 'Адрес места жительства'
+Заявка на технологическое присоединение,#{fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'},"{'места', 'ApplicantType'}",,fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'
+Заявка на технологическое присоединение,RegionaddrFactRef,{'securityDataProvider'},,securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')
+Заявка на технологическое присоединение,invoiceTP,{'securityDataProvider'},,!securityDataProvider.hasRole('tehprisEE_ZayavkaTP')
+Заявка на технологическое присоединение,HouseaddrFact,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,HouseaddrFact,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,RegionaddrRef,{'securityDataProvider'},,securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')
+Заявка на технологическое присоединение,RegionaddrRef,"{'empty', 'securityDataProvider', 'id'}",,!((empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,DZO,"{'empty', 'securityDataProvider', 'id'}",,securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')  or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and !securityDataProvider.hasRole('admin') and empty fields.id
+Заявка на технологическое присоединение,RegionaddrReg,{'securityDataProvider'},,!securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')
+Заявка на технологическое присоединение,RegionaddrReg,"{'empty', 'securityDataProvider', 'id'}",,!((empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP'))) and empty fields.id
+Заявка на технологическое присоединение,RegionaddrFact,{'securityDataProvider'},,!securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')
+Заявка на технологическое присоединение,emailAddress,"{'empty', 'email', 'emailAddress', 'securityDataProvider', 'id', 'sessionContext'}",,!empty fields.emailAddress or !empty fields.id ? fields.emailAddress : ( empty securityDataProvider.loggedInUser ? sessionContext.get('emailAddressAcc') : !securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') ? securityDataProvider.loggedInUser.email : !empty sessionContext.get('accession_user') ? sessionContext.get('accession_user').email : sessionContext.get('emailAddressAcc') )
+Заявка на технологическое присоединение,SignFirstName,"{'fields', 'true'}",,fields['SignFL'] eq true or fields['SignUL'] eq true
+Заявка на технологическое присоединение,StreetaddrReg,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,StagesTP,"{'Code', 'securityDataProvider', 'fields'}",,!securityDataProvider.hasRole('tehprisEE_ZayavkaTP') and fields['p_TypeTP'].Code eq '32880'
+Заявка на технологическое присоединение,Regionaddr,{'securityDataProvider'},,!securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')
+Заявка на технологическое присоединение,HouseaddrReg,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,cBuildingaddr,"{'empty', 'securityDataProvider', 'sessionContext'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')  or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty sessionContext.get('accession_user'))
+Заявка на технологическое присоединение,_region,{'securityDataProvider'},,securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')
+Заявка на технологическое присоединение,_region,"{'empty', 'securityDataProvider', 'id'}",,!((empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator') or securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id)
+Заявка на технологическое присоединение,Houseaddr,"{'empty', 'securityDataProvider', 'id'}",,empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')  or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id
+Заявка на технологическое присоединение,Houseaddr,"{'empty', 'securityDataProvider', 'id'}",,!(empty securityDataProvider.loggedInUser or securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')and empty fields.id)
