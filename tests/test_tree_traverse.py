@@ -1,13 +1,16 @@
 import unittest
 
-from src.getOperands_01 import toDMN
-from src.treeFormula import tree, treeHeight, DMNTree, ToFEELConverter, zipFormula, unzipOperand, \
-    extract_id_re, FormulaZipper, SimpleOperandMarker, unpack
+from src.translator.toKNF import toDMNReady
+from src.translator.treeFormula import tree, DMNTree, zipFormula, FormulaZipper, SimpleOperandMarker, unpack
+from src.translator.treeFormula import treeHeight, ToFEELConverter, printDMNTree
 
 simple_operand = "value.property"
 simplify_with_ternary = "fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'"
+simple_operand_or = "fields['SignFL'] eq true or fields['SignUL'] eq true"
 sub_dmn_equality = "(first and second) == third"
 sub_dmn_empty = "empty (first and second)"
+sub_dmn_not_empty = "! empty (first and second)"
+sub_dmn_complex = "fields.p_ContractTransferType.Code eq '7185643' and !empty fields.ScanNotificationLetterSO"
 translate_with_ternary = "a ? b : c"
 translate_with_equality = "(a == b) and (c ne d)"
 translate_with_complex_value = "value.property == 12"
@@ -35,16 +38,35 @@ class TestTreeTraverses(unittest.TestCase):
     def test_find_sub_dmn_equality(self):
         t = tree(sub_dmn_equality)
         dmntree = DMNTree(t)
-        self.assertEqual(1, len(dmntree.expr.children))
-        self.assertEqual('(firstandsecond)', dmntree.expr.children[0].expression)
-        self.assertEqual('==', dmntree.expr.children[0].operator.getText())
+        self.assertEqual(1, len(dmntree.root.children))
+        self.assertEqual('(firstandsecond)', dmntree.root.children[0].expression)
+        self.assertEqual('==', dmntree.root.children[0].operator.getText())
 
     def test_find_sub_dmn_empty(self):
         t = tree(sub_dmn_empty)
         dmntree = DMNTree(t)
-        self.assertEqual(1, len(dmntree.expr.children))
-        self.assertEqual('(firstandsecond)', dmntree.expr.children[0].expression)
-        self.assertEqual('empty', dmntree.expr.children[0].operator.getText())
+        self.assertEqual(1, len(dmntree.root.children))
+        self.assertEqual('(firstandsecond)', dmntree.root.children[0].expression)
+        self.assertEqual('empty', dmntree.root.children[0].operator.getText())
+
+    def test_find_sub_dmn_empty(self):
+        t = tree(sub_dmn_not_empty)
+        dmntree = DMNTree(t)
+
+        printDMNTree(dmntree)
+
+        self.assertEqual(1, len(dmntree.root.children))
+
+        self.assertEqual('!empty(firstandsecond)', dmntree.root.children[0].expression)
+        self.assertEqual('!', dmntree.root.children[0].operator.getText())
+
+        self.assertEqual('(firstandsecond)', dmntree.root.children[0].children[0].expression)
+        self.assertEqual('empty', dmntree.root.children[0].children[0].operator.getText())
+
+    def test_find_sub_dmn_complex(self):
+        t = tree(sub_dmn_complex)
+        dmntree = DMNTree(t)
+        printDMNTree(dmntree)
 
     def test_translate_ternary(self):
         self.assertTranslation(translate_with_ternary, 'if a then b else c')
@@ -71,11 +93,11 @@ class TestTreeTraverses(unittest.TestCase):
         self.assertTranslation(translate_complex_ternary, "if value.property then ( first_var and second_var or not( third_var ) ) else 'xexe'")
 
     def test_simplify(self):
-        prepared = zipFormula(simplify_with_ternary).expression
-        prepared = toDMN(prepared)
-        prepared = unpack(prepared)
+        prepared = zipFormula(tree(simplify_with_ternary)).expression
+        prepared = toDMNReady(prepared)
+        prepared = unpack(' or '.join(prepared))
         self.assertTrue(prepared in [
-            "or(and((fields.ApplicantType.value.fields.Code  eq 'UL' ), 'Юридический адрес' ), and(!(fields.ApplicantType.value.fields.Code  eq 'UL' ), 'Адрес места регистрации' ))",
+            "!( fields . ApplicantType . value . fields . Code_eq \'UL\') and   \'Адрес места регистрации\' ( fields . ApplicantType . value . fields . Code_eq \'UL\') and   \'Юридический адрес\'",
             "or(and(!(fields.ApplicantType.value.fields.Code  eq 'UL' ), 'Адрес места регистрации' ), and((fields.ApplicantType.value.fields.Code  eq 'UL' ), 'Юридический адрес' ))"
         ], prepared)
 
@@ -86,6 +108,10 @@ class TestTreeTraverses(unittest.TestCase):
         zipper.visit(t)
         self.assertEqual(8, len(zipper.result.split(' ')))
 
+    def test_or(self):
+        prepared = zipFormula(simple_operand_or).expression
+        prepared = toDMNReady(prepared)
+        prepared = unpack(prepared)
 
 if __name__ == '__main__':
     unittest.main()

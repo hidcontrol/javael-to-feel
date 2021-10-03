@@ -1,5 +1,5 @@
 import unittest
-from src.JavaEL_tokenize import JavaELTokenType, JavaELToken, tokenize_expression
+from src.dependencyTable import JavaELTokenType, JavaELToken, tokenize_expression
 
 
 class TestTokenize(unittest.TestCase):

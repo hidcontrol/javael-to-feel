@@ -1,5 +1,5 @@
 .idea
-data_samples
+tests/res/data_samples
 out
 venv
 *.ipynb

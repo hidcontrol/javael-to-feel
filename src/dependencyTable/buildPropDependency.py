@@ -11,7 +11,7 @@ from matplotlib import pyplot as plt
 from loguru import logger
 from collections import namedtuple
 from enum import Enum
-from typing import List, Set
+from typing import List, Set, Dict
 from JavaEL_tokenize import JavaELTokenType, tokenize_expression
 
 ExpressionDependencyBase = namedtuple('ExpressionDependencyBase', ('property', 'expression', 'condition_type', 'form'))
@@ -47,7 +47,7 @@ DATAFRAME_DMN_NAME = 'DMN_name'
 DATAFRAME_EXPRESSION = 'expression'
 
 
-def extract_prop_dependency_from_file(xml_file_path):
+def extract_prop_dependency_from_file(xml_file_path) -> Dict[str, List[ExpressionDependency]]:
     """
     get Java EL expressions from xml file with <form> tags
     :param xml_file_path: path to form xml file
@@ -110,28 +110,6 @@ def extract_props_from_expression(expr_dep: str) -> Set[str]:
                 dependents.add(val[0])
 
     return dependents
-
-
-class JavaELExpression:
-    """
-    Class represents common Java EL expression
-    Every JavaELExpression consists of JavaELSimpleExpressions and logical operators
-    """
-
-    def __init__(self, expression: ExpressionDependency):
-        self.expression = expression
-
-    def __str__(self):
-        return self.expression
-
-
-class JavaELSimpleExpression(JavaELExpression):
-    """
-    Class represents simple expression with only one operator or boolean
-    """
-
-    def __init__(self, *args, **kwargs):
-        super(JavaELSimpleExpression, self).__init__(*args, **kwargs)
 
 
 @click.command()

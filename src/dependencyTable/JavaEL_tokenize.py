@@ -1,7 +1,7 @@
 import re
 from enum import Enum
 from collections import namedtuple
-
+from typing import List
 
 value_re = re.compile(r'^[\d\w.\'-]*(?:\(\'\w*\'\))?')
 empty_re = re.compile(r'^empty')
@@ -136,7 +136,7 @@ def recognize_token(expression: str, offset: int) -> JavaELToken:
     raise ValueError(f'Unexpected token {expression[offset]}')
 
 
-def tokenize_expression(expression: str):
+def tokenize_expression(expression: str) -> List[JavaELToken]:
     """
     Parse JavaEL expression by tokens
     :param expression:

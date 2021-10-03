@@ -1,5 +1,5 @@
 import unittest
-from src.getOperands_01 import toDMN
+from src.translator.toKNF import toDMNReady
 
 test_el = "empty fields.id or !securityDataProvider.hasRole('tehprisEE_User')or\
     (dataObjectController.instance.objectStatus.status.code eq 'ta03_Paused')or\
@@ -18,7 +18,7 @@ test_el_expected = "Or(~securityDataProvider_hasRole_tehprisEE_User_, And(fields
 
 class TestToDMN(unittest.TestCase):
     def test_to_dmn(self):
-        result = toDMN(test_el)
+        result = toDMNReady(test_el)
         self.assertEqual(test_el_expected, result)
 
 
