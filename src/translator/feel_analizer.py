@@ -25,6 +25,22 @@ class FEELInputExtractor(feelVisitor):
     def result(self):
         return self.identifiers
 
+    def visitR_filterPathExpression(self, ctx:feelParser.R_filterPathExpressionContext):
+        lbrack_found = False
+        rbrack_found = False
+        for c in ctx.getChildren():
+            if isinstance(c, TerminalNode) and c.symbol.type == feelParser.LBRACK:
+                lbrack_found = True
+            elif isinstance(c, TerminalNode) and c.symbol.type == feelParser.RBRACK:
+                rbrack_found = True
+
+        if lbrack_found and rbrack_found:
+            p = SyntaxTreePrinter()
+            p.visit(ctx)
+            self.identifiers.add(p.tree_expression)
+        else:
+            self.visitChildren(ctx)
+
     def visitTerminal(self, node):
         if node.symbol.type == feelLexer.Identifier and isinstance(node.parentCtx, feelParser.NameRefContext):
             self.identifiers.add(node.getText())
@@ -51,3 +67,17 @@ class FEELRuleExtractor(feelVisitor):
         self.rule.append(
             ctx.getText()
         )
+
+
+class SyntaxTreePrinter(feelVisitor):
+    def __init__(self):
+        super(SyntaxTreePrinter, self).__init__()
+        self.result = []
+
+    def visitTerminal(self, node):
+        self.result.append(node.getText())
+
+    @property
+    def tree_expression(self):
+        return ' '.join(self.result)
+

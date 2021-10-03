@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Set
 from lxml import etree
 
 from loguru import logger
@@ -65,7 +65,9 @@ class DMNTree:
     def __init__(self, ctx: ParserRuleContext):
         self.ctx = ctx
         if ctx:
-            self.root = ExpressionDMN(ctx.getText(), [ctx])
+            p = SyntaxTreePrinter()
+            p.visit(ctx)
+            self.root = ExpressionDMN(p.tree_expression, [ctx])
             self.root.find_dependencies()
 
 
@@ -110,6 +112,14 @@ def unzipOperand(operand_id: str) -> str:
     return result
 
 
+def concatWithOr(or_operands: Set[str]):
+    scoped_or_operands = set()
+    for s in or_operands:
+        scoped_or_operands.add('(' + s + ')')
+
+    return ' or '.join(scoped_or_operands)
+
+
 def unpack(formula: str) -> str:
     # set scopes after not
     for not_m in not_re.findall(formula):
@@ -119,11 +129,12 @@ def unpack(formula: str) -> str:
     for m in extract_id_re.findall(formula):
         formula = formula.replace(m, unzipOperand(m))
     formula = formula.replace('op_', ' ')
-    formula = formula.replace('_ ', ' ').replace(' _', ' ')
+    formula = re.sub(r'_(..)_', r' \g<1> ', formula)
+    formula = formula.replace('_ ', ' ').replace(' _', ' ').replace("\'", "\"")
 
     # java el logical operators form
     formula = formula.replace('~', '!').replace('And', 'and').replace('Or', 'or')
-    return formula
+    return ' '.join(formula.split())
 
 
 new_child_dmn_handler = None
@@ -329,7 +340,7 @@ class ToFEELConverter(JavaELParserVisitor):
         operator = ctx.getChild(1).getText()
         if operator == '==' or operator == 'eq':
             self.translated.append(self.visit(ctx.getChild(0)))
-            self.translated.append('')
+            self.translated.append('=')
             self.translated.append(self.visit(ctx.getChild(2)))
 
         elif operator == '!=' or operator == 'ne':
@@ -419,7 +430,10 @@ class DMNTreeBuilder(JavaELParserVisitor):
 
     def visitRelation(self, ctx: JavaELParser.RelationContext):
         if ctx.getChildCount() > 1:
-            self.processBinary(ctx)
+            # пропустить скобки
+            if not (isinstance(ctx.getChild(0), TerminalNode) and ctx.getChild(0).symbol.type == JavaELParser.OpenParen) and \
+                    not (isinstance(ctx.getChild(2), TerminalNode) and ctx.getChild(2).token.type != JavaELParser.CloseParen):
+                self.processBinary(ctx)
         else:
             return self.visitChildren(ctx)
 
@@ -838,8 +852,8 @@ def _translateDMNReadyinDMNTree(node: DMNTreeNode) -> None:
     if isinstance(node, ExpressionDMN):
         logger.debug(f"translating ExpressionDMN node {node.expression}")
         node.expression = zipFormula(tree(node.expression)).expression
-        node.expression = ' or '.join(toDMNReady(node.expression))
-        node.expression = unpack(node.expression)
+        node.expression = toDMNReady(node.expression)
+        node.expression = unpack(concatWithOr(node.expression))
         logger.debug(f"dnf converted: {node.expression}")
         dmn_ready_tree = tree(node.expression)
         conv = ToFEELConverter()

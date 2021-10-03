@@ -60,8 +60,8 @@ class DmnElementsExtracter:
         """
         operand op value -> op value
         operand.field op value -> op value
-        operand.field[] op value-> op value
-        operand[val] null -> null
+        operand.field[] op value-> operand.field[] op value
+        operand[val] = null -> operand[val] = null
 
         :param expr: FEEL expression without logical
         :return:
@@ -72,22 +72,21 @@ class DmnElementsExtracter:
         return rule_extr.result
 
     @classmethod
-    def _prepare(cls, operands_FEEL: Set[str]) -> List[List[str]]:
+    def _split_by_or_by_and(cls, operands_FEEL: str) -> List[List[str]]:
         """
-        expr_null and empty_expr and ... -> [expr null, empty expr, ...]
+        (... and ... and ...) or (... and ... and ...) -> [ [and operands]]
         :param operands_FEEL: {'... and ...',..}
         :return: [[operands], ..]
         """
-        or_concatenated = []
-        for operand in operands_FEEL:
-            in_and = operand.split('and')
-            if in_and:
-                or_splited = []
-                for e in in_and:
-                    e = e.replace('empty_', 'empty ').replace('_null', ' null').strip()
-                    or_splited.append(e)
-                or_concatenated.append(or_splited)
-        return or_concatenated
+        or_splited = []
+        for or_ops in operands_FEEL.split('or'):
+            and_ops = or_ops.split('and')
+            and_splited = []
+            for e in and_ops:
+                e = e.replace('empty_', 'empty ').replace('_null', ' null').strip()
+                and_splited.append(e)
+            or_splited.append(and_splited)
+        return or_splited
 
     @classmethod
     def getInputs(cls, expr: str) -> Set[str]:  # lvalue во всех операндах or
@@ -103,10 +102,10 @@ class DmnElementsExtracter:
         return extractor.result
 
     @classmethod
-    def getRulesOrdered(cls, expr_tree: str, inputs) -> Iterable[RuleTag]:  # rvalue c оператором
+    def getRulesOrdered(cls, expr: str, inputs) -> Iterable[RuleTag]:  # rvalue c оператором
         """
         :param inputs: order of rules
-        :param expr_tree:
+        :param expr:
         :return:
         """
         rules = dict().fromkeys(inputs)
@@ -115,7 +114,7 @@ class DmnElementsExtracter:
         is_none_row_needs = False
 
         # TODO: remove _prepare()
-        for row in cls._prepare({expr_tree}):
+        for row in cls._split_by_or_by_and(expr):
             output = []
 
             for cell in row:
@@ -226,7 +225,7 @@ class DecisionTable:
         return cls.newTable(
                 inputs,
                 output_name,
-                DmnElementsExtracter.getRulesOrdered(expression, inputs),
+            DmnElementsExtracter.getRulesOrdered(expression, inputs),
                 dependentDMNs
             )
 

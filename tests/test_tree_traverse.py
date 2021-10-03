@@ -1,7 +1,7 @@
 import unittest
 
 from src.translator.toKNF import toDMNReady
-from src.translator.treeFormula import tree, DMNTree, zipFormula, FormulaZipper, SimpleOperandMarker, unpack
+from src.translator.treeFormula import tree, DMNTree, zipFormula, FormulaZipper, SimpleOperandMarker, unpack, concatWithOr
 from src.translator.treeFormula import treeHeight, ToFEELConverter, printDMNTree
 
 simple_operand = "value.property"
@@ -95,11 +95,14 @@ class TestTreeTraverses(unittest.TestCase):
     def test_simplify(self):
         prepared = zipFormula(tree(simplify_with_ternary)).expression
         prepared = toDMNReady(prepared)
-        prepared = unpack(' or '.join(prepared))
-        self.assertTrue(prepared in [
-            "!( fields . ApplicantType . value . fields . Code_eq \'UL\') and   \'Адрес места регистрации\' ( fields . ApplicantType . value . fields . Code_eq \'UL\') and   \'Юридический адрес\'",
-            "or(and(!(fields.ApplicantType.value.fields.Code  eq 'UL' ), 'Адрес места регистрации' ), and((fields.ApplicantType.value.fields.Code  eq 'UL' ), 'Юридический адрес' ))"
-        ], prepared)
+        prepared = unpack(concatWithOr(prepared))
+        self.assertTrue(
+            prepared in [
+            '(( fields . ApplicantType . value . fields . Code eq  \'UL\') and \'Юридический адрес\') or (!( fields . ApplicantType . value . fields . Code eq \'UL\') and \'Адрес места регистрации\')',
+            '(!( fields . ApplicantType . value . fields . Code eq  \'UL\') and \'Адрес места регистрации\') or (( fields . ApplicantType . value . fields . Code eq  \'UL\') and \'Юридический адрес\')'
+                ]
+            , "Unpack has error"
+        )
 
     def testZipper(self):
         t = tree(simplify_with_ternary)
@@ -109,9 +112,16 @@ class TestTreeTraverses(unittest.TestCase):
         self.assertEqual(8, len(zipper.result.split(' ')))
 
     def test_or(self):
-        prepared = zipFormula(simple_operand_or).expression
+        prepared = zipFormula(tree(simple_operand_or)).expression
         prepared = toDMNReady(prepared)
-        prepared = unpack(prepared)
+        prepared = unpack(concatWithOr(prepared))
+        self.assertTrue(
+            prepared in [
+                "( fields [ 'SignUL' ] eq true) or ( fields [ 'SignFL' ] eq true)",
+                "( fields [ 'SignFL' ] eq true) or ( fields [ 'SignUL' ] eq true)"
+            ],
+            "Unpack broken"
+        )
 
 if __name__ == '__main__':
     unittest.main()
