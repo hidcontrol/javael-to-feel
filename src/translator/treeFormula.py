@@ -431,9 +431,10 @@ class DMNTreeBuilder(JavaELParserVisitor):
     def visitRelation(self, ctx: JavaELParser.RelationContext):
         if ctx.getChildCount() > 1:
             # пропустить скобки
-            if not (isinstance(ctx.getChild(0), TerminalNode) and ctx.getChild(0).symbol.type == JavaELParser.OpenParen) and \
-                    not (isinstance(ctx.getChild(2), TerminalNode) and ctx.getChild(2).token.type != JavaELParser.CloseParen):
+            if not (isinstance(ctx.getChild(0), TerminalNode) and ctx.getChild(0).symbol.type == JavaELParser.OpenParen) and not (isinstance(ctx.getChild(2), TerminalNode) and ctx.getChild(2).token.type != JavaELParser.CloseParen):
                 self.processBinary(ctx)
+            else:
+                return self.visitChildren(ctx)
         else:
             return self.visitChildren(ctx)
 
