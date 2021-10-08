@@ -1,6 +1,5 @@
 import unittest
 from src.translator.translate import translate, xml_from_dmntree
-from lxml import etree
 
 XML_TEST_OUT_PATH = 'res/out/test_xml_out'
 XSD_PATH = 'res/xsd/dmn.xsd'

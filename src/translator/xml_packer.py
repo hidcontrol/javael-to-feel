@@ -4,7 +4,9 @@ import re
 from lxml import etree
 from enum import Enum
 from collections import namedtuple
-from src.translator.toKNF import toDMNReady
+
+from src.translator.dmn_tree import DMNTree, DMNTreeNode, OperatorDMN, ExpressionDMN
+from src.translator.knf_converter import toDMNReady
 from typing import Dict, Iterable, Set, List, Collection
 from loguru import logger
 from src.translator.feel_analizer import tree, FEELInputExtractor, FEELRuleExtractor
@@ -620,6 +622,74 @@ class DecisionTable:
     @staticmethod
     def _constructInformationRequirementId() -> str:
         return 'InformationRequirement_' + DecisionTable._constructIdSuffix()
+
+
+class DMN_XML:
+    @classmethod
+    def visit(cls, tree: DMNTree) -> etree.Element:
+        """
+        DFS на возврате
+        :return:
+        """
+        root = tree.root
+        decisions = []
+        cls._dfs(root, decisions)
+        return expression_xml('drd_id', decisions)
+
+    @classmethod
+    def _dfs(cls, node: DMNTreeNode, decisions: List[etree.Element]):
+        if len(node.children):
+            for child in node.children:
+                cls._dfs(child, decisions)
+
+        # constraint dmn node
+        if isinstance(node, OperatorDMN):
+            cls.visitConstraint(node, decisions)
+        elif isinstance(node, ExpressionDMN):
+            # expression node
+            cls.visitExpression(node, decisions)
+        else:
+            raise ValueError('XML builder got wrong DMN node type')
+
+    @classmethod
+    def visitExpression(cls, node: ExpressionDMN, decision_list: List[etree.Element]):
+        logger.debug(f'construct DMN xml from <red>expression</red>: <green>{node.expression}</green>')
+
+        dependents = ['dmn' + str(id(c)) for c in node.children]
+
+        new_table = DecisionTable.from_expression(node.expression, 'output_name here', dependents)
+
+        if not new_table:
+            logger.error(f'construct DMN xml from <red>expression</red>: <green>{node.expression}</green> failure')
+            raise ValueError('DecisionTable is None')
+
+        decision_list.append(new_table)
+
+    @classmethod
+    def visitConstraint(cls, node: OperatorDMN, decision_list: List[etree.Element]):
+        logger.debug(f'construct DMN xml from <red>constraint</red>: <green>{node.operator}</green>')
+
+        dependents = ['dmn' + str(id(c)) for c in node.children]
+
+        if node.operator.symbol.type in [JavaELParser.Empty, JavaELParser.Not]:
+            new_table = DecisionTable.from_constraint(node.operator.symbol.type, dependents, decision_list[-1])
+
+            if new_table is None:
+                logger.error(f'construct DMN xml from <red>constraint</red>: <green>{node.operator}</green> failure')
+                raise ValueError('DecisionTable is None')
+
+            decision_list.append(new_table)
+        else:
+            left_op = decision_list[-2]
+            right_op = decision_list[-1]
+
+            new_table = DecisionTable.from_constraint(node.operator, dependents, left_op, right_op)
+
+            if new_table is None:
+                logger.error(f'construct DMN xml from <red>constraint</red>: <green>{node.operator}</green> failure')
+                raise ValueError('DecisionTable is None')
+
+            decision_list.append(new_table)
 
 
 def expression_xml(drd_id: str, decisions: List[etree.Element]):

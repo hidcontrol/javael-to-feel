@@ -1,6 +1,6 @@
 import unittest
 
-from src.translator.toKNF import toDMNReady
+from src.translator.knf_converter import toDMNReady
 from src.translator.treeFormula import tree, DMNTree, zipFormula, FormulaZipper, SimpleOperandMarker, unpack, concatWithOr
 from src.translator.treeFormula import treeHeight, ToFEELConverter, printDMNTree
 
@@ -96,10 +96,12 @@ class TestTreeTraverses(unittest.TestCase):
         prepared = zipFormula(tree(simplify_with_ternary)).expression
         prepared = toDMNReady(prepared)
         prepared = unpack(concatWithOr(prepared))
+        prepared = prepared.replace(' ', '')
         self.assertTrue(
             prepared in [
-            '(( fields . ApplicantType . value . fields . Code eq  \'UL\') and \'Юридический адрес\') or (!( fields . ApplicantType . value . fields . Code eq \'UL\') and \'Адрес места регистрации\')',
-            '(!( fields . ApplicantType . value . fields . Code eq  \'UL\') and \'Адрес места регистрации\') or (( fields . ApplicantType . value . fields . Code eq  \'UL\') and \'Юридический адрес\')'
+            '((fields.ApplicantType.value.fields.Codeeq\"UL\")and\"Юридическийадрес\")or(!(fields.ApplicantType.value.fields.Codeeq\"UL\")and\"Адресместарегистрации\")',
+            '(!(fields.ApplicantType.value.fields.Codeeq\"UL\")and\"Адресместарегистрации\")or((fields.ApplicantType.value.fields.Codeeq\"UL\")and\"Юридическийадрес\")',
+            '(!(fields.ApplicantType.value.fields.Codeeq"UL")and"Адресместарегистрации")or((fields.ApplicantType.value.fields.Codeeq"UL")and"Юридическийадрес")'
                 ]
             , "Unpack has error"
         )
