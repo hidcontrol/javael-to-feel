@@ -17,6 +17,7 @@ def tree(expression: str) -> ParserRuleContext:
     return tree_returned.compilation_unit()
 
 
+# TODO: что считать input? nameRef или его часть?
 class FEELInputExtractor(feelVisitor):
     def __init__(self):
         super(FEELInputExtractor, self).__init__()

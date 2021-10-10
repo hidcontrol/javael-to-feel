@@ -93,7 +93,7 @@ class DmnElementsExtracter:
         return to_return
 
     @classmethod
-    def getInputs(cls, expr: str) -> Set[str]:  # lvalue во всех операндах or
+    def getInputs(cls, expr: str) -> Set[str]:
         """
         operands can be 'lvalue op rvalue' or 'input.boolean_function'
         inputs are lvalue or input without boolean_function
@@ -228,7 +228,7 @@ class DecisionTable:
         return cls.newTable(
                 inputs,
                 output_name,
-            DmnElementsExtracter.getRulesOrdered(expression, inputs),
+                DmnElementsExtracter.getRulesOrdered(expression, inputs),
                 dependentDMNs
             )
 
@@ -410,16 +410,16 @@ class DecisionTable:
 
         rules = (
             RuleTag(
-                inputEntries=(f"{op.get('id')}", 'true'),
+                inputEntries=['true'],
                 outputEntry='false'
             ),
             RuleTag(
-                inputEntries=('', ''),
+                inputEntries=[''],
                 outputEntry='true'
             )
         )
         return cls.newTable(
-            [op.get('id')],
+            [dependentDMNs[0]],
             cls.OPERATION_RESULT_LABEL,
             rules,
             dependentDMNs
@@ -433,16 +433,16 @@ class DecisionTable:
 
         rules = (
             RuleTag(
-                inputEntries=(f"{op.get('id')}", 'null'),
+                inputEntries=['null'],
                 outputEntry='true'
             ),
             RuleTag(
-                inputEntries=('', ''),
+                inputEntries=[''],
                 outputEntry='false'
             )
         )
         return cls.newTable(
-            [op.get('id')],
+            [dependentDMNs[0]],
             cls.OPERATION_RESULT_LABEL,
             rules,
             dependentDMNs

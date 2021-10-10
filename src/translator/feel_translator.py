@@ -98,6 +98,7 @@ class ToFEELConverter(JavaELParserVisitor):
                     elif operator == JavaELParser.Empty:
                         self.translateUnaryToFEEL(ctx)
                         self.translated.append(' ')
+                        self.translated.append(' = ')
                         self.translated.append('null')
                 else:
                     self.visit(child)

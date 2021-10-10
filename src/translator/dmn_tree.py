@@ -152,7 +152,7 @@ class DMNTreeBuilder(JavaELParserVisitor):
 
     def processUnary(self, ctx: ParserRuleContext):
         """
-        Add DMNNode represents unary operator if operand not simple
+        Add DMNNode represents unary operator if operand not simple. Remove operator and replace operands to dmn11111...
         :param ctx:
         :return:
         """
@@ -186,7 +186,7 @@ class DMNTreeBuilder(JavaELParserVisitor):
                     # редактируем свое выражение
                     ast_printer.visit(maybe_operand)
                     self.node.expression = self.node.expression.replace(ast_printer.tree_expression,
-                                                                        ' ' + new_child_id + ' ')
+                                                                        ' ' + new_child_id + ' ').replace(maybe_operator.getText(), '')
 
                     # все следующие пометить как принадлежащие node
                     for j in range(i + 1, children_count):
@@ -206,7 +206,7 @@ class DMNTreeBuilder(JavaELParserVisitor):
 
                     # редактируем свое выражение
                     self.node.expression = self.node.expression.replace(ast_printer.tree_expression,
-                                                                        ' ' + new_child_id + ' ')
+                                                                        ' ' + new_child_id + ' ').replace(maybe_operator.getText(), '')
                     # пометить операнд как принадлежащий node
                     add_color_to_ctx(maybe_operand, new_child_id)
                     # self.node.expression = self.node.expression.replace(maybe_operand.getText(), ' ' + new_child_id + ' ')
