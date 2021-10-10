@@ -1,5 +1,6 @@
 from lxml import etree
 
+from src.translator.ast_printer import FEELTreePrinter
 from src.translator.dmn_tree import DMNTreeNode, ExpressionDMN, DMNTree, printDMNTree, OperatorDMN
 from src.translator.feel_translator import ToFEELConverter
 from src.translator.knf_converter import toDMNReady
@@ -8,6 +9,7 @@ from src.translator.to_knf_zipper import zipFormula, unpack, concatWithOr
 from loguru import logger
 
 from src.translator.xml_packer import DMN_XML
+from src.translator.zip_storage import OperatorsStorage
 
 
 def translate(java_el_expr: str) -> DMNTree:
@@ -22,11 +24,12 @@ def translate(java_el_expr: str) -> DMNTree:
     printDMNTree(dmn_tree)
     logger.debug('---------------------------')
     # logger.opt(colors=True).debug('<green>Syntax tree after dmn defragmentation</green>')
-    # stp = SyntaxTreePrinter()
+    # stp = FEELTreePrinter()
     # stp.visit(el_tree)
     # logger.opt(colors=True).debug(f'<green>{stp.tree_expression}</green>')
     # logger.debug('---------------------------')
     translateDMNReadyinDMNTree(dmn_tree)
+    logger.debug(f'Operators storage saves: {OperatorsStorage().keys()}')
     logger.debug('Translated DMN tree')
     printDMNTree(dmn_tree)
     logger.debug('---------------------------')
@@ -60,8 +63,12 @@ def _translateDMNReadyinDMNTree(node: DMNTreeNode) -> None:
         _translateDMNReadyinDMNTree(child)
 
     if isinstance(node, ExpressionDMN):
+        printer = FEELTreePrinter()
+        printer.visit(tree(node.expression))
+        node.expression = zipFormula(tree(printer.tree_expression)).expression
+        printer.visit(tree(node.expression))
+        node.expression = printer.tree_expression
         logger.debug(f"translating ExpressionDMN node {node.expression}")
-        node.expression = zipFormula(tree(node.expression)).expression
         node.expression = toDMNReady(node.expression)
         node.expression = unpack(concatWithOr(node.expression))
         logger.debug(f"dnf converted: {node.expression}")

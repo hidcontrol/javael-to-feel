@@ -1,8 +1,15 @@
 import unittest
 
+from src.translator.ast_printer import FEELTreePrinter
+from src.translator.dmn_tree import DMNTree, printDMNTree
+from src.translator.feel_translator import ToFEELConverter
 from src.translator.knf_converter import toDMNReady
-from src.translator.treeFormula import tree, DMNTree, zipFormula, FormulaZipper, SimpleOperandMarker, unpack, concatWithOr
-from src.translator.treeFormula import treeHeight, ToFEELConverter, printDMNTree
+from src.translator.node_algorithm import tree, treeHeight
+from src.translator.to_knf_zipper import zipFormula, unpack, concatWithOr, SimpleOperandMarker, FormulaZipper
+
+from loguru import logger
+
+logger = logger.opt(colors=True)
 
 simple_operand = "value.property"
 simplify_with_ternary = "fields.ApplicantType.value.fields.Code eq 'UL' ? 'Юридический адрес' : 'Адрес места регистрации'"
@@ -19,7 +26,7 @@ translate_with_not = "! (a and b)"
 translate_with_complex_unary = "not empty (a and b or c)"
 translate_complex = "view.viewId.contains('portal.xhtml') and value.contains(fields.ApplicantType.Code) and !empty fields.wiringDiagram and fields.p_ContractTransferType.Code eq '7185643' and (!empty fields.id or (dataObjectController.instance.objectStatus.status.code eq 'ta03_Paused' and fields.SendDate))"
 translate_complex_ternary = "value.property ? (first_var and second_var or ! third_var) : 'xexe'"
-
+translate_ast_complex = "securityDataProvider.loggedInUser or (securityDataProvider.hasRole('tehprisEE_portalUserRegistrator')) or (securityDataProvider.hasRole('tehprisEE_ZayavkaTP')) and empty fields.id"
 
 simple_operand_tree_h = 11
 
@@ -124,6 +131,21 @@ class TestTreeTraverses(unittest.TestCase):
             ],
             "Unpack broken"
         )
+
+    def testASTPrinter(self):
+        printer = FEELTreePrinter()
+        ast = tree(sub_dmn_complex)
+        printer.visit(ast)
+        logger.debug(printer.tree_expression)
+        self.assertEqual(printer.tree_expression, "fields.p_ContractTransferType.Code eq '7185643' and  !  empty fields.ScanNotificationLetterSO")
+
+    def testASTPrinterComplex(self):
+        printer = FEELTreePrinter()
+        ast = tree(translate_ast_complex)
+        printer.visit(ast)
+        logger.debug(printer.tree_expression)
+        self.assertEqual(printer.tree_expression,
+                         "securityDataProvider.loggedInUser or  ( securityDataProvider.hasRole ( 'tehprisEE_portalUserRegistrator' )  )  or  ( securityDataProvider.hasRole ( 'tehprisEE_ZayavkaTP' )  )  and  empty fields.id")
 
 if __name__ == '__main__':
     unittest.main()

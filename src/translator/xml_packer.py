@@ -9,7 +9,7 @@ from src.translator.dmn_tree import DMNTree, DMNTreeNode, OperatorDMN, Expressio
 from src.translator.knf_converter import toDMNReady
 from typing import Dict, Iterable, Set, List, Collection
 from loguru import logger
-from src.translator.feel_analizer import tree, FEELInputExtractor, FEELRuleExtractor
+from src.translator.feel_analizer import tree, FEELInputExtractor, FEELRuleExtractor, AndSplitter, OrSplitter
 from ANTLR_JavaELParser.JavaELParser import JavaELParser
 
 xmlns = 'https://www.omg.org/spec/DMN/20191111/MODEL/'
@@ -74,21 +74,23 @@ class DmnElementsExtracter:
         return rule_extr.result
 
     @classmethod
-    def _split_by_or_by_and(cls, operands_FEEL: str) -> List[List[str]]:
+    def _split_by_or_by_and(cls, expr: str) -> List[List[str]]:
         """
         (... and ... and ...) or (... and ... and ...) -> [ [and operands]]
-        :param operands_FEEL: {'... and ...',..}
+        :param expr: {'... and ...',..}
         :return: [[operands], ..]
         """
-        or_splited = []
-        for or_ops in operands_FEEL.split('or'):
-            and_ops = or_ops.split('and')
-            and_splited = []
-            for e in and_ops:
-                e = e.replace('empty_', 'empty ').replace('_null', ' null').strip()
-                and_splited.append(e)
-            or_splited.append(and_splited)
-        return or_splited
+        feel_ast = tree(expr)
+        or_splitter = OrSplitter()
+        and_splitter = AndSplitter()
+        or_splitter.visit(feel_ast)
+        or_operands = or_splitter.result
+        to_return = []
+        for or_op in or_operands:
+            or_op_ast = tree(or_op)
+            and_splitter.visit(or_op_ast)
+            to_return.append(and_splitter.result)
+        return to_return
 
     @classmethod
     def getInputs(cls, expr: str) -> Set[str]:  # lvalue во всех операндах or
@@ -115,7 +117,6 @@ class DmnElementsExtracter:
         to_return = []
         is_none_row_needs = False
 
-        # TODO: remove _prepare()
         for row in cls._split_by_or_by_and(expr):
             output = []
 
@@ -441,7 +442,7 @@ class DecisionTable:
             )
         )
         return cls.newTable(
-            (op.get('id')),
+            [op.get('id')],
             cls.OPERATION_RESULT_LABEL,
             rules,
             dependentDMNs
@@ -659,9 +660,13 @@ class DMN_XML:
 
         new_table = DecisionTable.from_expression(node.expression, 'output_name here', dependents)
 
-        if not new_table:
+        if new_table is None:
             logger.error(f'construct DMN xml from <red>expression</red>: <green>{node.expression}</green> failure')
             raise ValueError('DecisionTable is None')
+
+        logger.debug(f'GENERATED XML FROM EXPRESSION')
+        logger.debug(f'Expression: <red>{node.expression}</red>')
+        logger.opt(colors=False).debug(f'\n{etree.tostring(new_table, pretty_print=True).decode("UTF-8")}')
 
         decision_list.append(new_table)
 
@@ -671,6 +676,7 @@ class DMN_XML:
 
         dependents = ['dmn' + str(id(c)) for c in node.children]
 
+        new_table = None
         if node.operator.symbol.type in [JavaELParser.Empty, JavaELParser.Not]:
             new_table = DecisionTable.from_constraint(node.operator.symbol.type, dependents, decision_list[-1])
 
@@ -690,6 +696,10 @@ class DMN_XML:
                 raise ValueError('DecisionTable is None')
 
             decision_list.append(new_table)
+
+        logger.debug(f'GENERATED XML FROM CONSTRAINT')
+        logger.debug(f'Constraint: <red>{node.operator}</red>')
+        logger.opt(colors=False).debug(f'\n{etree.tostring(new_table, pretty_print=True).decode("UTF-8")}')
 
 
 def expression_xml(drd_id: str, decisions: List[etree.Element]):

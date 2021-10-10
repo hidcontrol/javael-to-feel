@@ -2,6 +2,7 @@ from antlr4 import *
 from ANTLR_FEELParser.feelParser import feelParser
 from ANTLR_FEELParser.feelLexer import feelLexer
 from ANTLR_FEELParser.feelVisitor import feelVisitor
+from src.translator.ast_printer import FEELTreePrinter
 
 
 def tree(expression: str) -> ParserRuleContext:
@@ -35,7 +36,7 @@ class FEELInputExtractor(feelVisitor):
                 rbrack_found = True
 
         if lbrack_found and rbrack_found:
-            p = SyntaxTreePrinter()
+            p = FEELTreePrinter()
             p.visit(ctx)
             self.identifiers.add(p.tree_expression)
         else:
@@ -69,15 +70,37 @@ class FEELRuleExtractor(feelVisitor):
         )
 
 
-class SyntaxTreePrinter(feelVisitor):
+class OrSplitter(feelVisitor):
     def __init__(self):
-        super(SyntaxTreePrinter, self).__init__()
-        self.result = []
+        super(OrSplitter, self).__init__()
+        self._operators = []
 
-    def visitTerminal(self, node):
-        self.result.append(node.getText())
+    def visitCondOr(self, ctx:feelParser.CondOrContext):
+        printer = FEELTreePrinter()
+        printer.visit(ctx.getChild(0))
+        self._operators.append(printer.tree_expression)
+
+        printer.visit(ctx.getChild(2))
+        self._operators.append(printer.tree_expression)
 
     @property
-    def tree_expression(self):
-        return ' '.join(self.result)
+    def result(self):
+        return self._operators
 
+
+class AndSplitter(feelVisitor):
+    def __init__(self):
+        super(AndSplitter, self).__init__()
+        self._operators = []
+
+    def visitCondAnd(self, ctx: feelParser.CondOrContext):
+        printer = FEELTreePrinter()
+        printer.visit(ctx.getChild(0))
+        self._operators.append(printer.tree_expression)
+
+        printer.visit(ctx.getChild(2))
+        self._operators.append(printer.tree_expression)
+
+    @property
+    def result(self):
+        return self._operators

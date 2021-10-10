@@ -1,13 +1,37 @@
+from ANTLR_FEELParser.feelVisitor import feelVisitor
 from ANTLR_JavaELParser.JavaELParser import JavaELParser
 from ANTLR_JavaELParser.JavaELParserVisitor import JavaELParserVisitor
 from loguru import logger
 
 logger = logger.opt(colors=True)
+logger.disable(__name__)
+
+keywords = [
+    JavaELParser.Not,
+    JavaELParser.Empty,
+    JavaELParser.Or,
+    JavaELParser.And,
+    JavaELParser.Minus,
+    JavaELParser.Plus,
+    JavaELParser.LessEqual,
+    JavaELParser.Less,
+    JavaELParser.Greater,
+    JavaELParser.GreaterEqual,
+    JavaELParser.Equality,
+    JavaELParser.Mul,
+    JavaELParser.Div,
+    JavaELParser.DoubleDots,
+    JavaELParser.Question,
+    JavaELParser.OpenParen,
+    JavaELParser.OpenBracket,
+    JavaELParser.CloseParen,
+    JavaELParser.CloseBracket
+]
 
 
-class SyntaxTreePrinter(JavaELParserVisitor):
+class JavaELTreePrinter(JavaELParserVisitor):
     def __init__(self):
-        super(SyntaxTreePrinter, self).__init__()
+        super(FEELTreePrinter, self).__init__()
         self.result = []
 
     def lastContextWasDMN(self):
@@ -21,7 +45,13 @@ class SyntaxTreePrinter(JavaELParserVisitor):
 
     def visitTerminal(self, node):
         logger.opt(colors=True).debug(f'terminal: <red>{id(node)}</red> <green>{node.getText()}</green> dmn: {hasattr(node, "colors")}')
-        self.result.append(node.getText())
+
+        if node.symbol.type in keywords:
+            self.result.append(' ')
+            self.result.append(node.getText())
+            self.result.append(' ')
+        else:
+            self.result.append(node.getText())
 
     def visitPrimitive(self, ctx:JavaELParser.PrimitiveContext):
         logger.opt(colors=True).debug(f'primitive: <red>{id(ctx)}</red> <green>{ctx.getText()}</green> dmn: {hasattr(ctx, "colors")}')
@@ -75,4 +105,26 @@ class SyntaxTreePrinter(JavaELParserVisitor):
 
     @property
     def tree_expression(self):
-        return ' '.join(self.result)
+        """
+        returns stored expression and clear storage
+        :return: string representation of expression
+        """
+        to_return = ''.join(self.result)
+        to_return = " ".join(to_return.split())
+        self.result.clear()
+        return to_return
+
+
+class FEELTreePrinter(feelVisitor):
+    def __init__(self):
+        super(FEELTreePrinter, self).__init__()
+        self.result = []
+
+    def visitTerminal(self, node):
+        self.result.append(node.getText())
+
+    @property
+    def tree_expression(self):
+        to_return = ' '.join(self.result)
+        self.result.clear()
+        return to_return

@@ -5,9 +5,10 @@ from typing import Set
 from antlr4 import ParserRuleContext, TerminalNode
 from ANTLR_JavaELParser.JavaELParser import JavaELParser
 from ANTLR_JavaELParser.JavaELParserVisitor import JavaELParserVisitor
+from src.translator.zip_storage import OperatorsStorage
 from loguru import logger
 
-from src.translator.ast_printer import SyntaxTreePrinter
+from src.translator.ast_printer import FEELTreePrinter
 
 ExpressionZipped = namedtuple('ExpressionZipped', ('expression', 'tree'))
 
@@ -101,8 +102,8 @@ class FormulaZipper(JavaELParserVisitor):
 
     def addIdIfSimple(self, ctx: ParserRuleContext):
         if hasattr(ctx, 'is_simple_operand') and ctx.is_simple_operand:
-            logger.debug('dmn_id {}', hasattr(ctx, 'dmn_id'))
             self._zipped.append('op_' + str(id(ctx)) + ' ')
+            OperatorsStorage()[str(id(ctx))] = ctx
         else:
             return self.visitChildren(ctx)
 
@@ -239,11 +240,11 @@ def zipFormula(context: ParserRuleContext) -> ExpressionZipped:
 
 
 def unzipOperand(operand_id: str) -> str:
-    operand = ctypes.cast(int(operand_id), ctypes.py_object).value
+    operand = OperatorsStorage()[operand_id]
 
-    logger.opt(colors=True).debug(f'<green>unzip {operand_id}</green>')
+    logger.opt(colors=True).debug(f'<green>unzip {operand_id}</green> to class: {operand.__class__.__name__}, attrs: {operand.__dict__}')
 
-    printer = SyntaxTreePrinter()
+    printer = FEELTreePrinter()
     printer.visit(operand)
     result = printer.tree_expression
     return result
